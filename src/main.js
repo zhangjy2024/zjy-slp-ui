@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Container, Aside, Main } from 'element-ui';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 import './permission'
 
-Vue.component(Container.name, Container);
-Vue.component('el-aside', Aside);    // 自定义组件名
-Vue.component(Main.name, Main);
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 

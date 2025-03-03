@@ -6,7 +6,7 @@ import qs from 'qs'
  */
 export async function userLoginAsync(data) {
   return request({
-    url: '/oauth/token',
+    url: '/oauth2/token',
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'

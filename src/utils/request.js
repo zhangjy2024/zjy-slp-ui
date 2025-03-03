@@ -3,6 +3,7 @@ import { Message, MessageBox } from "element-ui";
 import router from "@/router";
 
 const service = axios.create({
+  baseURL: '',
   timeout: 60000 * 10
 })
 
