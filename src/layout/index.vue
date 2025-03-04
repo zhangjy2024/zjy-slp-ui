@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="200px">
+    <el-aside class="left-content" width="200px">
       <!-- 左侧菜单栏 -->
       <sidebar></sidebar>
     </el-aside>
@@ -21,3 +21,12 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.left-content {
+  overflow: hidden;
+}
+.el-main {
+  padding: 0px;
+}
+</style>
