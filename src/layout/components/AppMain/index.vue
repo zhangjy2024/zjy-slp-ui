@@ -1,6 +1,6 @@
 <template>
-  <div>
-    我是右侧内容
+  <div class="app-main">
+    <!-- 右侧内容 -->
     <router-view></router-view>
   </div>
 </template>
@@ -11,3 +11,10 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.app-main {
+  height: 100vh;
+  padding: 0px 10px;
+}
+</style>
