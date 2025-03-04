@@ -9,7 +9,8 @@ export async function userLoginAsync(data) {
     url: '/oauth2/token',
     method: 'post',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic Y2hpY2s6MTIzNDU2'
     },
     data: qs.stringify(data)
   })

@@ -38,11 +38,12 @@ router.beforeEach(async (to, from, next) => {
   
   document.title = getPageTitle()
 
-  if (to.path === '/login' || to.meta.isPermit){
+  const token = sessionStorage.getItem('access_token');
+
+  if (to.path === '/login' || to.meta.isPermit || to.path === '/register'){
     registerRouteFresh = true;
     next();
   } else {
-    const token = sessionStorage.getItem('access_token');
     if (token) {
       if (registerRouteFresh) {
         try {

@@ -16,7 +16,6 @@ export const constantRoutes = [
   },
   {
     path: '/index',
-    name: HOME,
     redirect: '/home',
     component: Layout,
     hidden: true
@@ -31,7 +30,13 @@ export const constantRoutes = [
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
-  }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('@/views/register'),
+    hidden: true
+  },
 ]
 
 /**
@@ -50,6 +55,7 @@ const createRouter = () => {
   return new Router({
     base: routerBase(),
     mode: 'history',
+    scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
 }
