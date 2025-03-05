@@ -1,16 +1,16 @@
 <template>
   <!-- 首页主页 -->
   <div class="home-index">
-    <el-row :gutter="20">
-      <el-col :span="24">
+    <el-row :gutter="0">
+      <el-col :span="24" style="padding: 0;">
         <div>
           
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="20">
-      <el-col :span="18"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+    <el-row :gutter="0">
+      <el-col :span="18" style="padding: 0;"><div class="grid-content bg-purple"></div></el-col>
+      <el-col :span="6" style="padding: 0;"><div class="grid-content bg-purple"></div></el-col>
     </el-row>
   </div>
 </template>
