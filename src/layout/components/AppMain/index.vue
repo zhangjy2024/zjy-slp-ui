@@ -14,6 +14,7 @@ export default {
 
 <style scoped>
 .app-main {
-  height: 100vh;
+  height: 100vh - 10px;
+  padding: 5px;
 }
 </style>
