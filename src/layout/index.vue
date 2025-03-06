@@ -27,6 +27,7 @@ export default {
   overflow: hidden;
 }
 .el-main {
-  padding: 0px;
+  padding: 5px;
+  background-color: rgb(247, 247, 247);
 }
 </style>
