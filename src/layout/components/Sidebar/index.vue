@@ -49,6 +49,7 @@ export default {
 <style scoped>
 .left-sidebar {
   height: 100vh;
+  position: fixed;
 }
 
 .el-menu-vertical-demo {

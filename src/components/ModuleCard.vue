@@ -110,14 +110,6 @@ export default {
   border-radius: 2%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
-.body {
-  height: 90% - 20px;
-  padding: 5px;
-  display: grid;
-  box-sizing: border-box;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax(265px, 135px));
-}
 .el-divider--horizontal[data-v-2aa72868]{
   margin: 7px 0;
 }
