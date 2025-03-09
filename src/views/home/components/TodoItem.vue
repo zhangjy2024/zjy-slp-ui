@@ -41,14 +41,17 @@ export default {
 
 <style scoped>
 .table {
-  width: 265px;
+  width: 263px;
   height: 135px;
   padding: 5px;
-  margin: 5px;
+  margin: 0px;
   border-radius: 4%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   table-layout: fixed;
+}
+.table:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 .detail-content {
   width: 240px;
