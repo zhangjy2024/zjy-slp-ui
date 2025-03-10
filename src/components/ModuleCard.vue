@@ -9,7 +9,7 @@
     @mouseover="isHovered = true"
     @mouseleave="isHovered = false"
   >
-    <div class="header" :style="{backgroundColor: backgroundColor}">
+    <div class="header">
       <i v-if="icon" :class="icon" style="display: inline; font-weight: bold;"></i>
       <div class="title">
         {{ title }}
@@ -81,10 +81,12 @@ export default {
 .card:hover {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
 }
+.header {
+  background-color: rgb(0, 0, 0, 0);
+}
 .title {
   font-weight: bold;
   display: inline;
-  background-color: white;
 }
 .el-divider--horizontal {
   margin: 10px 0;
