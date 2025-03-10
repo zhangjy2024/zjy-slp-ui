@@ -60,6 +60,10 @@
                         <h3 style="margin: 10px 0px;">群聊名称</h3>
                         <div>最新消息</div>
                       </div>
+                      <div style="margin: 15px; margin-left: auto;">
+                        <el-badge :value="3" class="item" style="margin-left: 60px;"></el-badge>
+                        <div style="color: rgba(0, 0, 0, 0.4);">2025-5-10</div>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -68,13 +72,63 @@
           </tr>
           <tr>
             <td style="width: 50%; overflow: hidden;">
-              <module-card title="我的圈子" icon="el-icon-discover" :divider="true" width="95%" height="400px">
-
+              <module-card
+                title="我的圈子"
+                icon="el-icon-discover"
+                :divider="true"
+                width="95%"
+                height="400px">
+                <template v-slot:body>
+                  <div style="width: 100% - 10px; height: 360px;">
+                    <div style="display: flex; padding: 0px 10px 5px;">
+                      <img src="../img/组织头像.png" alt="圈子头像" width="70px" height="70px">
+                      <div>
+                        <h2 style="margin: 5px 10px;">圈子标题</h2>
+                        <p style="margin: 5px 12px;">圈子简介</p>
+                      </div>
+                      <div style="margin-left: auto; height: 100%; padding: 10px 0px; display: flex;">
+                        <div style="margin-right: 10px; padding: 0px;">
+                          <i class="el-icon-user" style="font-size: 25px; margin: 5px;"></i>
+                          15
+                          <i class="el-icon-tickets" style="font-size: 25px; margin: 5px;"></i>
+                          30
+                        </div>
+                        <el-button type="primary" plain style="float: right; height: 40px;">签到</el-button>
+                      </div>                    
+                    </div>
+                    <div>
+                      <div v-for="i in 4" style="margin: 4px 10px; display: flex; padding: 5px;background: linear-gradient(160deg, rgba(217, 236, 255, 0.8) 0%, rgba(0, 0, 0, 0) 70%)">
+                        <img src="../img/组织头像.png" alt="博主头像" width="45px" height="45px" style="margin-right: 5px;">
+                        <div style="max-width: 200px;">
+                          <h3 style="margin: 0px;">文章标题</h3>
+                          <p style="margin: 0px;">文章内容截取</p>
+                        </div>
+                        <div style="margin-left: auto;">
+                          <i class="iconfont icon-like"></i> 12
+                          <i class="el-icon-chat-line-square"></i> 24
+                        </div>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+                        <el-link style="font-size: 20px;">----------查看更多----------</el-link>
+                      </div>
+                    </div>
+                  </div>
+                </template>
               </module-card>
             </td>
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的文章" icon="el-icon-document" :divider="true" width="95%" height="400px">
-
+                <template v-slot:body>
+                  <div style="width: 100% - 10px; height: 360px; overflow: hidden; overflow-y: auto;">
+                    <div v-for="i in 6" style="margin-bottom: 5px; padding: 3px; border-left: 6px solid rgba(217, 236, 255); border-top: 1px solid rgba(217, 236, 255);">
+                      <h2 style="margin: 0px 5px;">文章标题</h2>
+                      <div style="display: flex;">
+                        <el-tag size="small" style="margin: 2px 5px;">文章标签</el-tag>
+                        <p style="margin: 0px;">文章内容截取</p>
+                      </div>
+                    </div>
+                  </div>
+                </template>
               </module-card>
             </td>
           </tr>
@@ -200,9 +254,7 @@ export default {
   width: 100% - 10px;
   height: 85px;
   display: flex;
-  padding: 5px;
   margin-bottom: -1px;
-  background-color: antiquewhite;
-  border: 1px solid black;
+  border: 1px solid rgba(217, 236, 255);
 }
 </style>
