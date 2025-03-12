@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
     <!-- 右侧内容 -->
-    <router-view></router-view>
+    <router-view style="height: 100%;"></router-view>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 .app-main {
-  height: 100vh - 10px;
+  height: calc(100vh - 20px);
   padding: 5px;
 }
 </style>

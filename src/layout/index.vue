@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside class="left-content" width="200px">
+    <el-aside class="left-content" :width="menuWidth">
       <!-- 左侧菜单栏 -->
       <sidebar></sidebar>
     </el-aside>
@@ -17,7 +17,11 @@ import { AppMain, Sidebar } from './components'
 export default {
   name: 'Layout',
   components: { AppMain, Sidebar },
-  
+  data() {
+    return {
+      menuWidth: '160px'
+    }
+  }
 }
 
 </script>
@@ -29,5 +33,6 @@ export default {
 .el-main {
   padding: 5px;
   background-color: rgb(247, 247, 247);
+  height: 100vh;
 }
 </style>
