@@ -2,6 +2,10 @@ import Vue from "vue"
 import Router from "vue-router"
 import Layout from '@/layout'
 import HOME from '@/router/home'
+import CONTACT from '@/router/contact'
+import GROUPS from '@/router/groups'
+import SET from '@/router/set'
+import SQUARE from "@/router/square"
 
 Vue.use(Router)
 
@@ -23,7 +27,7 @@ export const constantRoutes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login'),
+    component: () => import('@/views/login/index'),
     hidden: true
   },
   {
@@ -34,7 +38,7 @@ export const constantRoutes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import('@/views/register'),
+    component: () => import('@/views/register/index'),
     hidden: true
   },
 ]
@@ -43,7 +47,7 @@ export const constantRoutes = [
  * 需要验证权限的路由页面
  */
 export const asyncRoutes = [
-  HOME,
+  HOME, CONTACT, GROUPS, SET, SQUARE,
   { path: '*', redirect: '/404', hidden: true }
 ]
 
