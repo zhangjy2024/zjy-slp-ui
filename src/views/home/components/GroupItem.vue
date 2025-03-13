@@ -18,19 +18,12 @@
               </template>
               提瓦特之神
             </el-descriptions-item>
-            <el-descriptions-item>
+            <el-descriptions-item :span="2">
               <template slot="label">
                 <i class="el-icon-mobile-phone"></i>
                 手机号
               </template>
               18100000000
-            </el-descriptions-item>
-            <el-descriptions-item>
-              <template slot="label">
-                <i class="el-icon-location-outline"></i>
-                居住地
-              </template>
-              苏州市
             </el-descriptions-item>
             <el-descriptions-item>
               <template slot="label">
