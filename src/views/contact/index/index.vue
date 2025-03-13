@@ -11,8 +11,8 @@
             </el-input>
             <el-collapse style="height: 100%; overflow: hidden; overflow-y: auto; margin-top: 15px;">
               <el-collapse-item title="我的好友" name="1">
-                <div style="width: 100% - 6px; height: 50px; margin: 3px; padding: 8px 2px; padding-top: 2px; display: flex;">
-                  <img src="../../home/img/组织头像.png" alt="用户头像">
+                <div @click="openAndInitChatCard" style="width: 100% - 6px; height: 50px; margin: 3px; padding: 8px 2px; padding-top: 2px; display: flex;">
+                  <img src="../../home/img/组织头像.png" alt="用户头像" @click.stop="openFriendInfo">
                   <div>
                     <h3 style="margin: 1px 4px;">用户名称</h3>
                     <p style="margin: 2px 6px;">最新消息</p>
@@ -89,12 +89,13 @@
         </el-tabs>
       </el-col>
       <el-col :span="17" style="padding: 5px; height: 100%;">
-        <el-card class="box-card" style="height: 100%; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);">
+        <el-card v-if="chatCard" class="box-card" style="height: 100%; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);">
           <div slot="header" class="clearfix">
             <div>
               <span style="font-size: 20px;line-height: 40px;padding: 6px">用户名称</span>
-              <i class="iconfont icon-shipin" style="font-size: 30px;float: right; margin: 6px 10px;margin-right: 15px;"></i>
-              <i class="iconfont icon-dianhua" style="font-size: 30px;float: right; margin: 6px 10px;"></i>
+              <el-button icon="el-icon-close" class="button-icon" @click="closeCahtCard" style="width: 40px; height: 40px; padding: 2px; background-color: rgba(0, 0, 0, 0); border: 0px; float: right; margin-left: 9px; margin-top: 2px;"></el-button>
+              <el-button icon="iconfont icon-shipin" class="button-icon" style="width: 40px; height: 40px; padding: 2px; background-color: rgba(0, 0, 0, 0); border: 0px; float: right;"></el-button>
+              <el-button icon="iconfont icon-dianhua" class="button-icon" style="width: 40px; height: 40px; padding: 2px; background-color: rgba(0, 0, 0, 0); border: 0px; float: right;"></el-button>
             </div>
           </div>
           <div style="height: calc(100% - 50px); display: flex; padding: 0px; position: relative;">
@@ -112,9 +113,9 @@
               <div class="input-box" style="min-height: 206px;">
                 <div class="block" style="background-color: rgba(247, 247, 247, 1); height: 50px;">
                   <div style="margin: auto 0px; height: 100%; display: flex; align-items: center; border-top: 2px solid rgb(217, 236, 255);">
-                    <i class="iconfont icon-biaoqing-xue" style="font-size: 30px;margin: 0px 9px;"></i>
-                    <i class="el-icon-picture-outline-round" style="font-size: 30px;margin: 0px 9px;"></i>
-                    <i class="el-icon-folder-opened" style="font-size: 30px;margin: 0px 9px;"></i>
+                    <el-button icon="iconfont icon-biaoqing-xue" class="button-icon" style="padding: 4px; background-color: rgba(0, 0, 0, 0); border: 0px; margin: 0px 10px;"></el-button>
+                    <el-button icon="el-icon-picture-outline-round" class="button-icon" style="padding: 4px; background-color: rgba(0, 0, 0, 0); border: 0px; margin: 0px 10px;"></el-button>
+                    <el-button icon="el-icon-folder-opened" class="button-icon" style="padding: 4px; background-color: rgba(0, 0, 0, 0); border: 0px; margin: 0px 10px;"></el-button>
                   </div>
                 </div>
                 <div class="input" style="padding: 10px 5px; height: calc(100% - 70px);background-color: rgba(247, 247, 247, 1);">
@@ -131,7 +132,9 @@
                 </div>
               </div>
             </div>
-            <div class="contact-info" style="width: 25%; height: calc(100% + 22px); background-color: rgba(247, 247, 247, 1); border-left: 2px solid rgb(217, 236, 255);"></div>
+            <div class="contact-info" style="width: 25%; height: calc(100% + 22px); background-color: rgba(247, 247, 247, 1); border-left: 2px solid rgb(217, 236, 255);">
+
+            </div>
           </div>
         </el-card>
         
@@ -147,9 +150,23 @@ export default {
   data() {
     return {
       input: '',
-      textarea: ''
+      textarea: '',
+      chatCard: false,
     }
   },
+
+  methods: {
+    closeCahtCard() {
+      this.chatCard = false;
+    },
+    openAndInitChatCard() {
+
+      this.chatCard = true;
+    },
+    openFriendInfo() {
+      alert("用户信息弹窗")
+    },
+  }
 
 }
 </script>
@@ -175,6 +192,10 @@ export default {
   padding: 10px;
   border-bottom: 2px solid rgb(217, 236, 255);
   background-color: rgba(247, 247, 247, 1);
+}
+.button-icon i {
+  font-size: 30px !important;
+  font-weight: bold;
 }
 .el-card__body {
   padding: 0px;
