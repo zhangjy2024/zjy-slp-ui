@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card groups-index-card" style="width: 100%; height: calc(100vh - 10px);">
     <div slot="header" class="clearfix">
-      <el-dropdown @command="handleCommand" trigger="click">
+      <el-dropdown @command="handleCommand">
         <!-- <span class="el-dropdown-link">
           下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
         </span> -->
@@ -35,8 +35,8 @@
       </div>
     </div>
     <table style="height: 100%; width: 100%; table-layout: fixed; margin-bottom: 18px;">
-      <tr style="">
-        <td style="width: 50%; overflow: hidden;">
+      <tr>
+        <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
             title="组织详情"
@@ -71,7 +71,7 @@
             </template>
           </module-card>
         </td>
-        <td style="width: 50%; overflow: hidden;">
+        <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
             title="组织成员"
@@ -103,7 +103,7 @@
             </template>
           </module-card>
         </td>
-        <td style="width: 50%; overflow: hidden;">
+        <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
             title="组织通知"
@@ -125,23 +125,79 @@
         </td>
       </tr>
       <tr>
-        <td style="width: 50%; overflow: hidden;">
+        <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
             title="组织群聊"
-          ></module-card>
+          >
+            <template v-slot:body>
+              <div style="margin-top: 10px;">
+                <div v-for="i in 12" class="room-item" style="width: 100% - 6px; height: 50px; margin: 3px; padding: 10px 5px; display: flex;">
+                  <img src="../../home/img/组织头像.png" alt="用户头像">
+                  <div>
+                    <h3 style="margin: 1px 4px;">群聊名称</h3>
+                    <p style="margin: 2px 6px;">群聊成员：最新消息</p>
+                  </div>              
+                  <div style="margin: 3px; margin-left: auto;">
+                    <el-badge :value="3" class="item" style="margin-left: 60px;"></el-badge>
+                    <div style="color: rgba(0, 0, 0, 0.4); text-align: right;">2025-5-10</div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </module-card>
         </td>
-        <td style="width: 50%; overflow: hidden;">
+        <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
             title="组织任务"
-          ></module-card>
+          >
+            <template v-slot:body>
+              <div style="margin-top: 10px;">
+                <div v-for="i in 9" class="task-item" style="padding-bottom: 10px; padding-left: 5px;">
+                  <div style="display: flex;">
+                    <img src="../../home/img/组织头像.png" alt="指派人头像" width="45px" height="45px" style="margin: 5px; margin-top: 9px;">
+                    <div style="padding: 5px; width: 100%;">
+                      <h2 style="margin: 0px; font-size: 22px;">任务名称</h2>
+                      <div style="display: flex; margin-top: 3px;">
+                        <p style="margin: 0px; font-size: 14px; width: 40%;">指派人:指派人名称</p>
+                        <p style="margin: 0px; font-size: 14px; width: 60%;">结束时间:2025-5-10</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p style="margin: 0px; padding: 0 5px; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                    &ensp;&ensp;&ensp;&ensp;任务描述:阿八八八八八八八啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿八八八八八八八啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿八八八八八八八啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                  </p>
+                </div>
+              </div>
+            </template>
+          </module-card>
         </td>
-        <td style="width: 50%; overflow: hidden;">
+        <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
             title="组织资源"
-          ></module-card>
+          >
+          <template v-slot:body>
+              <div style="margin-top: 10px;">
+                <div v-for="i in 9" class="resource-item" style="padding-bottom: 10px; padding-left: 5px;">
+                  <div style="display: flex;">
+                    <img src="../../home/img/组织头像.png" alt="上传者头像" width="45px" height="45px" style="margin: 5px; margin-top: 9px;">
+                    <div style="padding: 5px; width: 100%;">
+                      <h2 style="margin: 0px; font-size: 22px;">资源名称</h2>
+                      <div style="display: flex; margin-top: 3px;">
+                        <p style="margin: 0px; font-size: 14px; width: 40%;">上传者:上传者名称</p>
+                        <p style="margin: 0px; font-size: 14px; width: 60%;">资源大小: 10MB</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p style="margin: 0px; padding: 0 5px; font-size: 14px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                    &ensp;&ensp;&ensp;&ensp;资源描述:阿八八八八八八八啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿八八八八八八八啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊阿八八八八八八八啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                  </p>
+                </div>
+              </div>
+            </template>
+        </module-card>
         </td>
       </tr>
     </table>
@@ -260,6 +316,15 @@ export default {
   overflow-y: auto;
 }
 .notify-item:hover .notify-content {
-  background-color: rgb(217, 236, 255);
+  background-color: rgb(236, 245, 255);
+}
+.room-item:hover {
+  background-color: rgb(236, 245, 255);
+}
+.task-item:hover {
+  background-color: rgb(236, 245, 255);
+}
+.resource-item:hover {
+  background-color: rgb(236, 245, 255);
 }
 </style>

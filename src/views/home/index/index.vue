@@ -134,7 +134,62 @@
           </tr>
         </table>
       </el-col>
-      <el-col :span="6" style="padding: 0;"><div class="grid-content bg-purple"></div></el-col>
+      <el-col :span="6" style="padding: 0; height: 100%;">
+        <div
+         style="background-color: white;
+         width: 100%;
+         height: calc(100vh - 150px);
+         margin: 10px;
+         position: -webkit-sticky;
+         position: sticky;
+         top: 150px;
+         overflow-y: auto;
+         border: 1px solid rgba(217, 236, 255);
+         ">
+          <div class="header" style="width: calc(100% - 22px); height: 50px; display: flex;align-items: center; padding-left: 15px; font-size: 18px; border-left: 6px solid rgba(217, 236, 255);">通知</div>
+          <el-collapse class="notification-bar">
+            <el-collapse-item title="系统通知" name="1">
+              <div class="home-notify-item" style="display: flex;">
+                <div class="home-notify-content" style="padding: 10px 0px; padding-left: 10px;">
+                  <img src="../img/组织头像.png" alt="系统图片" width="46px" height="46px" style="border-radius: 50%; margin-top: 3px;">
+                </div>
+                <div class="home-notify-content" style="padding: 10px 0px; padding-right: 10px;">
+                  <h3 style="margin: 0px; margin-left: 5px; line-height: 20px;">通知标题</h3>
+                  <p style="margin: 0px; margin-left: 5px; line-height: 17px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                    &ensp;&ensp;&ensp;&ensp;通知内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                  </p>
+                </div>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="组织通知" name="2">
+              <div v-for="i in 13" class="home-notify-item" style="display: flex;">
+                <div class="home-notify-content" style="padding: 10px 0px; padding-left: 10px;">
+                  <img src="../img/组织头像.png" alt="系统图片" width="46px" height="46px" style="border-radius: 50%; margin-top: 3px;">
+                </div>
+                <div class="home-notify-content" style="padding: 10px 0px; padding-right: 10px;">
+                  <h3 style="margin: 0px; margin-left: 5px; line-height: 20px;">通知标题</h3>
+                  <p style="margin: 0px; margin-left: 5px; line-height: 17px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                    &ensp;&ensp;&ensp;&ensp;通知内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                  </p>
+                </div>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="广场通知" name="3">
+              <div v-for="i in 14" class="home-notify-item" style="display: flex;">
+                <div class="home-notify-content" style="padding: 10px 0px; padding-left: 10px;">
+                  <img src="../img/组织头像.png" alt="系统图片" width="46px" height="46px" style="border-radius: 50%; margin-top: 3px;">
+                </div>
+                <div class="home-notify-content" style="padding: 10px 0px; padding-right: 10px;">
+                  <h3 style="margin: 0px; margin-left: 5px; line-height: 20px;">通知标题</h3>
+                  <p style="margin: 0px; margin-left: 5px; line-height: 17px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                    &ensp;&ensp;&ensp;&ensp;通知内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+                  </p>
+                </div>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -208,9 +263,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .home-index {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .el-row {
   margin-bottom: 5px;
@@ -221,19 +279,6 @@ export default {
 .el-col {
   padding: 0px;
   border-radius: 4px;
-}
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
 }
 .block {
   margin: auto 0px;
@@ -256,5 +301,14 @@ export default {
   display: flex;
   margin-bottom: -1px;
   border: 1px solid rgba(217, 236, 255);
+}
+.notification-bar .el-collapse-item__header {
+  padding-left: 10px;
+}
+.home-notify-item:hover .home-notify-content {
+  background-color: rgb(236, 245, 255);
+}
+.notification-bar .el-collapse-item__content {
+  padding: 0;
 }
 </style>
