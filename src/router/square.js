@@ -13,5 +13,10 @@ export default {
       name: 'SquareIndex',
       component: () => import('@/views/square/index'),
     },
+    {
+      path: '/square/addPosts',
+      name: 'AddPosts',
+      component: () => import('@/views/square/addPosts')
+    }
   ]
 }

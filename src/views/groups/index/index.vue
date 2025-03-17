@@ -35,10 +35,11 @@
       </div>
     </div>
     <table style="height: 100%; width: 100%; table-layout: fixed; margin-bottom: 18px;">
-      <tr>
+      <tr style="height: 50%;">
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
+            height="calc(100% - 20px)"
             title="组织详情"
           >
             <template v-slot:body>
@@ -74,6 +75,7 @@
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
+            height="calc(100% - 20px)"
             title="组织成员"
           >
             <template v-slot:body>
@@ -106,6 +108,7 @@
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
+            height="calc(100% - 20px)"
             title="组织通知"
           >
             <template v-slot:body>
@@ -128,6 +131,7 @@
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
+            height="calc(100% - 20px)"
             title="组织群聊"
           >
             <template v-slot:body>
@@ -150,6 +154,7 @@
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
+            height="calc(100% - 20px)"
             title="组织任务"
           >
             <template v-slot:body>
@@ -176,6 +181,7 @@
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
             width="94%"
+            height="calc(100% - 20px)"
             title="组织资源"
           >
           <template v-slot:body>
