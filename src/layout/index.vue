@@ -31,7 +31,7 @@ export default {
   overflow: hidden;
 }
 .el-main {
-  padding: 5px;
+  padding: 1px;
   background-color: rgb(247, 247, 247);
   height: 100vh;
 }

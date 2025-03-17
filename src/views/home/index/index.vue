@@ -137,16 +137,16 @@
       <el-col :span="6" style="padding: 0; height: 100%;">
         <div
          style="background-color: white;
-         width: 100%;
+         width: calc(100% - 10px);
          height: calc(100vh - 150px);
-         margin: 10px;
+         margin: 5px;
          position: -webkit-sticky;
          position: sticky;
          top: 150px;
          overflow-y: auto;
          border: 1px solid rgba(217, 236, 255);
          ">
-          <div class="header" style="width: calc(100% - 22px); height: 50px; display: flex;align-items: center; padding-left: 15px; font-size: 18px; border-left: 6px solid rgba(217, 236, 255);">通知</div>
+          <div class="header" style="width: calc(100% - 22px); height: 50px; display: flex;align-items: center; padding-left: 15px; font-size: 21px; border-left: 6px solid rgba(217, 236, 255);">通知</div>
           <el-collapse class="notification-bar">
             <el-collapse-item title="系统通知" name="1">
               <div class="home-notify-item" style="display: flex;">
@@ -303,7 +303,10 @@ export default {
   border: 1px solid rgba(217, 236, 255);
 }
 .notification-bar .el-collapse-item__header {
-  padding-left: 10px;
+  padding-left: 13px;
+}
+.el-collapse-item__header {
+  font-size: 18px;
 }
 .home-notify-item:hover .home-notify-content {
   background-color: rgb(236, 245, 255);

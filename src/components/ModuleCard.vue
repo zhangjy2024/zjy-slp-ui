@@ -4,7 +4,7 @@
     :style="{
       height: height,
       width: width,
-      backgroundColor: backgroundColor
+      backgroundColor: backgroundColor,
     }"
     @mouseover="isHovered = true"
     @mouseleave="isHovered = false"
