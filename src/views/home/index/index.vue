@@ -3,20 +3,18 @@
   <div class="home-index">
     <el-row :gutter="0">
       <el-col :span="24" style="padding: 0;">
-        <div>
-          <module-card
-            width="100% - 20px"
-            height="100px"
-            background-color="rgb(217, 236, 255)"
-          >
-            <template v-slot:body>
-              <div style="display: flex; margin-top: 10px;">
-                <div class="block"><el-avatar :size="70" :src="circleUrl"></el-avatar></div>
-                <div style="width: 400px; padding: 5px;"><h3 style="margin: 5px;">欢迎您：</h3></div>
-              </div>
-            </template>
-          </module-card>
-        </div>
+        <module-card
+          width="100% - 20px"
+          height="100px"
+          background-color="rgb(217, 236, 255)"
+        >
+          <template v-slot:body>
+            <div style="display: flex; margin-top: 10px;">
+              <div class="block"><el-avatar :size="70" :src="circleUrl"></el-avatar></div>
+              <div style="width: 400px; padding: 5px;"><h3 style="margin: 5px;">欢迎您：</h3></div>
+            </div>
+          </template>
+        </module-card>
       </el-col>
     </el-row>
     <el-row :gutter="0">
@@ -79,7 +77,7 @@
                 width="95%"
                 height="400px">
                 <template v-slot:body>
-                  <div style="width: 100% - 10px; height: 360px;">
+                  <div style="width: calc(100% - 10px); height: calc(100% - 300px);">
                     <div style="display: flex; padding: 0px 10px 5px;">
                       <img src="../img/组织头像.png" alt="圈子头像" width="70px" height="70px">
                       <div>
@@ -119,7 +117,7 @@
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的文章" icon="el-icon-document" :divider="true" width="95%" height="400px">
                 <template v-slot:body>
-                  <div style="width: 100% - 10px; height: 360px; overflow: hidden; overflow-y: auto;">
+                  <div style="width: calc(100% - 10px); height: calc(100% - 300px); overflow: hidden; overflow-y: auto;">
                     <div v-for="i in 6" style="margin-bottom: 5px; padding: 3px; border-left: 6px solid rgba(217, 236, 255); border-top: 1px solid rgba(217, 236, 255);">
                       <h2 style="margin: 0px 5px;">文章标题</h2>
                       <div style="display: flex;">
@@ -195,7 +193,7 @@
 </template>
 
 <script>
-import ModuleCard from '@/components/ModuleCard.vue';
+import ModuleCard from '@/components/ModuleCard/index.vue';
 import TodoItem from '../components/TodoItem.vue';
 import GroupItem from '../components/GroupItem.vue';
 
