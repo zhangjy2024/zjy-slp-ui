@@ -211,7 +211,7 @@
 </template>
 
 <script>
-import ModuleCard from '@/components/ModuleCard.vue';
+import ModuleCard from '@/components/ModuleCard/index.vue';
   
 export default {
 
