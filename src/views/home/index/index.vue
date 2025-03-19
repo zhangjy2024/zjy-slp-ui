@@ -10,8 +10,8 @@
         >
           <template v-slot:body>
             <div style="display: flex; margin-top: 10px;">
-              <div class="block"><el-avatar :size="70" :src="circleUrl"></el-avatar></div>
-              <div style="width: 400px; padding: 5px;"><h3 style="margin: 5px;">欢迎您：</h3></div>
+              <div class="block"><el-avatar :size="70" :src="avatarSrc"></el-avatar></div>
+              <div style="width: 400px; padding: 5px;"><h3 style="margin: 5px;">欢迎您：{{ userName }}</h3></div>
             </div>
           </template>
         </module-card>
@@ -19,16 +19,14 @@
     </el-row>
     <el-row :gutter="0">
       <el-col :span="18" style="padding: 0;">
-        <module-card title="我的待办" icon="el-icon-s-order" :divider="true" width="100% - 20px" height="325px">
+        <module-card title="我的待办" icon="el-icon-s-order" :divider="true" width="100% - 20px" height="325px" v-loading="myTasksLoading">
           <el-button slot="header" @click="openTodoDetail" type="text" style="float: right; padding: 5px">更多</el-button>
           <template v-slot:body>
             <div class="todoItems">
               <todo-item
-                v-for="item in taskList"
-                :group-name="item.groupName"
-                :task-designee="item.taskDesignee"
-                :task-end-date="item.taskEndDate"
-                :task-detail="item.taskDetail"
+                v-for="task in tasks"
+                :key="task.id"
+                :task="task"
               ></todo-item>
             </div>
           </template>
@@ -38,10 +36,10 @@
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的组织" icon="el-icon-office-building" width="95%" height="400px">
                 <template v-slot:body>
-                  <div class="block">
+                  <div v-loading="myGroupsLoading" class="block">
                     <el-carousel trigger="click" :autoplay="false" style="height: 370px;">
-                      <el-carousel-item v-for="item in 4" :key="item" style="height: 370px;">
-                        <group-item></group-item>
+                      <el-carousel-item v-for="group in groups" :key="group.id" style="height: 370px;">
+                        <group-item :group="group"></group-item>
                       </el-carousel-item>
                     </el-carousel>
                   </div>
@@ -49,20 +47,10 @@
               </module-card>
             </td>
             <td style="width: 50%; overflow: hidden;">
-              <module-card title="我的群聊" icon="el-icon-chat-dot-square" width="95%" height="400px">
+              <module-card title="我的群聊" icon="el-icon-chat-dot-square" width="95%" height="400px" v-loading="myRoomsLoading">
                 <template v-slot:body>
                   <div style="margin-top: 7px; height: 370px; overflow: hidden; overflow-y: auto;">
-                    <div v-for="i in 7" class="chat-room-item">
-                      <img src="../img/组织头像.png" alt="群聊头像" style="width: 60px; height: 60px; border-radius: 50%; margin: 10px 7px;">
-                      <div>
-                        <h3 style="margin: 10px 0px;">群聊名称</h3>
-                        <div>最新消息</div>
-                      </div>
-                      <div style="margin: 15px; margin-left: auto;">
-                        <el-badge :value="3" class="item" style="margin-left: 60px;"></el-badge>
-                        <div style="color: rgba(0, 0, 0, 0.4);">2025-5-10</div>
-                      </div>
-                    </div>
+                    <chat-room-item v-for="room in rooms" :key="room.id" :chatRoom="room"></chat-room-item>
                   </div>
                 </template>
               </module-card>
@@ -75,38 +63,39 @@
                 icon="el-icon-discover"
                 :divider="true"
                 width="95%"
-                height="400px">
+                height="400px"
+                v-loading="myCirclesLoading">
                 <template v-slot:body>
                   <div style="width: calc(100% - 10px); height: calc(100% - 300px);">
                     <div style="display: flex; padding: 0px 10px 5px;">
-                      <img src="../img/组织头像.png" alt="圈子头像" width="70px" height="70px">
+                      <img :src="circles[0].circleAvatarSrc" alt="圈子头像" width="70px" height="70px">
                       <div>
-                        <h2 style="margin: 5px 10px;">圈子标题</h2>
-                        <p style="margin: 5px 12px;">圈子简介</p>
+                        <h2 style="margin: 5px 10px;">{{ circles[0].name }}</h2>
+                        <p style="margin: 5px 12px;">{{ circles[0].description }}</p>
                       </div>
                       <div style="margin-left: auto; height: 100%; padding: 10px 0px; display: flex;">
                         <div style="margin-right: 10px; padding: 0px;">
                           <i class="el-icon-user" style="font-size: 25px; margin: 5px;"></i>
-                          15
+                          {{ circles[0].userNum }}
                           <i class="el-icon-tickets" style="font-size: 25px; margin: 5px;"></i>
-                          30
+                          {{ circles[0].postsNum }}
                         </div>
                         <el-button type="primary" plain style="float: right; height: 40px;">签到</el-button>
                       </div>                    
                     </div>
                     <div>
-                      <div v-for="i in 4" style="margin: 4px 10px; display: flex; padding: 5px;background: linear-gradient(160deg, rgba(217, 236, 255, 0.8) 0%, rgba(0, 0, 0, 0) 70%)">
-                        <img src="../img/组织头像.png" alt="博主头像" width="45px" height="45px" style="margin-right: 5px;">
+                      <div v-for="posts in circles[0].postsList" :key="posts.id" style="margin: 4px 10px; display: flex; padding: 5px;background: linear-gradient(160deg, rgba(217, 236, 255, 0.8) 0%, rgba(0, 0, 0, 0) 70%)">
+                        <img :src="posts.adminAvatarSrc" alt="博主头像" width="45px" height="45px" style="margin-right: 5px;">
                         <div style="max-width: 200px;">
-                          <h3 style="margin: 0px;">文章标题</h3>
-                          <p style="margin: 0px;">文章内容截取</p>
+                          <h3 style="margin: 0px;">{{ posts.title }}</h3>
+                          <p style="margin: 0px; font-size: 14px;">{{ posts.postsSummary }}</p>
                         </div>
                         <div style="margin-left: auto;">
-                          <i class="iconfont icon-like"></i> 12
-                          <i class="el-icon-chat-line-square"></i> 24
+                          <i class="iconfont icon-like"></i> {{ posts.likes }}
+                          <i class="el-icon-chat-line-square"></i> {{ posts.commentsNum }}
                         </div>
                       </div>
-                      <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+                      <div v-if="circles[0].postsList.length > 4" style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
                         <el-link style="font-size: 20px;">----------查看更多----------</el-link>
                       </div>
                     </div>
@@ -115,16 +104,10 @@
               </module-card>
             </td>
             <td style="width: 50%; overflow: hidden;">
-              <module-card title="我的文章" icon="el-icon-document" :divider="true" width="95%" height="400px">
+              <module-card title="我的文章" icon="el-icon-document" :divider="true" width="95%" height="400px" v-loading="myPostsLoading">
                 <template v-slot:body>
-                  <div style="width: calc(100% - 10px); height: calc(100% - 300px); overflow: hidden; overflow-y: auto;">
-                    <div v-for="i in 6" style="margin-bottom: 5px; padding: 3px; border-left: 6px solid rgba(217, 236, 255); border-top: 1px solid rgba(217, 236, 255);">
-                      <h2 style="margin: 0px 5px;">文章标题</h2>
-                      <div style="display: flex;">
-                        <el-tag size="small" style="margin: 2px 5px;">文章标签</el-tag>
-                        <p style="margin: 0px;">文章内容截取</p>
-                      </div>
-                    </div>
+                  <div style="width: calc(100% - 10px); height: 350px; overflow: hidden; overflow-y: auto;">
+                    <posts-item v-for="posts in postsList" :posts="posts"></posts-item>
                   </div>
                 </template>
               </module-card>
@@ -142,49 +125,27 @@
          position: sticky;
          top: 150px;
          overflow-y: auto;
-         border: 1px solid rgba(217, 236, 255);
-         ">
-          <div class="header" style="width: calc(100% - 22px); height: 50px; display: flex;align-items: center; padding-left: 15px; font-size: 21px; border-left: 6px solid rgba(217, 236, 255);">通知</div>
+         border: 1px solid rgba(217, 236, 255);">
+          <div class="notification-header">通知</div>
           <el-collapse class="notification-bar">
-            <el-collapse-item title="系统通知" name="1">
-              <div class="home-notify-item" style="display: flex;">
-                <div class="home-notify-content" style="padding: 10px 0px; padding-left: 10px;">
-                  <img src="../img/组织头像.png" alt="系统图片" width="46px" height="46px" style="border-radius: 50%; margin-top: 3px;">
-                </div>
-                <div class="home-notify-content" style="padding: 10px 0px; padding-right: 10px;">
-                  <h3 style="margin: 0px; margin-left: 5px; line-height: 20px;">通知标题</h3>
-                  <p style="margin: 0px; margin-left: 5px; line-height: 17px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
-                    &ensp;&ensp;&ensp;&ensp;通知内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                  </p>
-                </div>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="组织通知" name="2">
-              <div v-for="i in 13" class="home-notify-item" style="display: flex;">
-                <div class="home-notify-content" style="padding: 10px 0px; padding-left: 10px;">
-                  <img src="../img/组织头像.png" alt="系统图片" width="46px" height="46px" style="border-radius: 50%; margin-top: 3px;">
-                </div>
-                <div class="home-notify-content" style="padding: 10px 0px; padding-right: 10px;">
-                  <h3 style="margin: 0px; margin-left: 5px; line-height: 20px;">通知标题</h3>
-                  <p style="margin: 0px; margin-left: 5px; line-height: 17px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
-                    &ensp;&ensp;&ensp;&ensp;通知内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                  </p>
-                </div>
-              </div>
-            </el-collapse-item>
-            <el-collapse-item title="广场通知" name="3">
-              <div v-for="i in 14" class="home-notify-item" style="display: flex;">
-                <div class="home-notify-content" style="padding: 10px 0px; padding-left: 10px;">
-                  <img src="../img/组织头像.png" alt="系统图片" width="46px" height="46px" style="border-radius: 50%; margin-top: 3px;">
-                </div>
-                <div class="home-notify-content" style="padding: 10px 0px; padding-right: 10px;">
-                  <h3 style="margin: 0px; margin-left: 5px; line-height: 20px;">通知标题</h3>
-                  <p style="margin: 0px; margin-left: 5px; line-height: 17px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
-                    &ensp;&ensp;&ensp;&ensp;通知内容啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                  </p>
-                </div>
-              </div>
-            </el-collapse-item>
+            <div style="position: relative;">
+              <div class="diy-badge" v-if="sysNotifyBadge"></div>
+              <el-collapse-item title="系统通知" name="1">
+                <notify-item v-for="notify in sysNotifyList" :key="notify.id" :notify="notify" @clearNotify="clearBadge"></notify-item>
+              </el-collapse-item>
+            </div>
+            <div style="position: relative;">
+              <div class="diy-badge" v-if="groupNotifyBadge"></div>
+              <el-collapse-item title="组织通知" name="2">
+                <notify-item v-for="notify in groupNotifyList" :key="notify.id" :notify="notify" @clearNotify="clearBadge"></notify-item>
+              </el-collapse-item>
+            </div>
+            <div style="position: relative;">
+              <div  class="diy-badge" v-if="circleNotifyBadge"></div>
+              <el-collapse-item title="广场通知" name="3">
+                <notify-item v-for="notify in circleNotifyList" :key="notify.id" :notify="notify" @clearNotify="clearBadge"></notify-item>
+              </el-collapse-item>
+            </div>
           </el-collapse>
         </div>
       </el-col>
@@ -196,59 +157,60 @@
 import ModuleCard from '@/components/ModuleCard/index.vue';
 import TodoItem from '../components/TodoItem.vue';
 import GroupItem from '../components/GroupItem.vue';
+import ChatRoomItem from '../components/ChatRoomItem.vue';
+import PostsItem from '../components/PostsItem.vue';
+import NotifyItem from '../components/NotifyItem.vue';
+import { getMyGroups } from '@/api/groups/groups';
+import { getMyTasks } from '@/api/groups/tasks';
+import { getMyRooms } from '@/api/contact/room';
+import { getMyCircles } from '@/api/square/circle';
+import { getMyPosts } from '@/api/square/posts';
+import { getMyNotifys } from '@/api/notify';
 
 export default {
   name: 'HOMEIndex',
 
-  components: { ModuleCard, TodoItem, GroupItem },
+  components: { ModuleCard, TodoItem, GroupItem, ChatRoomItem, PostsItem, NotifyItem },
+
+  computed: {
+    userInfo() {
+      return JSON.parse(sessionStorage.getItem('user_info') || '{}');
+    },
+    userName() {
+      return this.userInfo.userName || '您还未登录！';
+    },
+    avatarSrc() {
+      return this.userInfo.avatarSrc;
+    },
+    sysNotifyBadge() {
+      return this.sysNotifyList.some(notify => notify.gotIt === "N");
+    },
+    groupNotifyBadge() {
+      return this.groupNotifyList.some(notify => notify.gotIt === "N");
+    },
+    circleNotifyBadge() {
+      return this.circleNotifyList.some(notify => notify.gotIt === "N");
+    },
+  },
 
   data() {
     return {
-      circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-      taskList: [
-        {
-          groupName: '任务一',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        },
-        {
-          groupName: '任务二',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        },
-        {
-          groupName: '任务三',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        },
-        {
-          groupName: '任务三',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        },
-        {
-          groupName: '任务三',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        },
-        {
-          groupName: '任务三',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        },
-        {
-          groupName: '任务三',
-          taskDesignee: '张三',
-          taskEndDate: '2025-4-10',
-          taskDetail: '一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一一'
-        }
-      ],
+      myGroupsLoading: true,
+      myTasksLoading: true,
+      myRoomsLoading: true,
+      myCirclesLoading: true,
+      myPostsLoading: true,
+
+      tasks: [],
+      groups: [],
+      rooms: [],
+      circles: [],
+      postsList: [],
+
+      sysNotifyList: [],
+      groupNotifyList: [],
+      circleNotifyList: [],
+      
     }
   },
 
@@ -256,7 +218,112 @@ export default {
     openTodoDetail() {
       this.$router.replace('/home/todo')
     },
+
+    clearBadge(notifyId, notifyType) {
+      const notifyLists = {
+        g: this.groupNotifyList,
+        c: this.circleNotifyList,
+        s: this.sysNotifyList
+      };
+
+      const notifyList = notifyLists[notifyType];
+      
+      if (notifyList) {
+        const index = notifyList.findIndex(notify => notify.id === notifyId);
+        if (index !== -1) {
+          this.$set(notifyList[index], 'gotIt', 'Y');
+        }
+      }
+    },
+
+    getMyGroups() {
+      this.myGroupsLoading = true;
+      getMyGroups().then((res) => {
+        this.groups = res.data.data
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        this.myGroupsLoading = false;
+      })
+    },
+
+    getMyTasks() {
+      this.myTasksLoading = true;
+      getMyTasks().then((res) => {
+        this.tasks = res.data.data
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        this.myTasksLoading = false;
+      })
+    },
+
+    getMyRooms() {
+      this.myRoomsLoading = true;
+      getMyRooms().then((res) => {
+        this.rooms = res.data.data
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        this.myRoomsLoading = false;
+      })
+    },
+
+    getMyCircles() {
+      this.myCirclesLoading = true;
+      getMyCircles().then((res) => {
+        this.circles = res.data.data
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        this.myCirclesLoading = false;
+      })
+    },
+
+    getMyPosts() {
+      this.myPostsLoading = true;
+      getMyPosts().then((res) => {
+        this.postsList = res.data.data
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
+        this.myPostsLoading = false;
+      })
+    },
+
+    getMyNotifys() {
+      getMyNotifys().then((res) => {
+        const { sysNotifyList, groupNotifyList, circleNotifyList } = res.data.data.reduce(
+          (acc, item) => {
+            if (item.groupId) {
+              acc.groupNotifyList.push(item);
+            } else if (item.circleId) {
+              acc.circleNotifyList.push(item);
+            } else {
+              acc.sysNotifyList.push(item);
+            }
+            return acc;
+          },
+          { sysNotifyList: [], groupNotifyList: [], circleNotifyList: [] }
+        );
+
+        this.sysNotifyList = sysNotifyList;
+        this.groupNotifyList = groupNotifyList;
+        this.circleNotifyList = circleNotifyList;
+      }).catch((error) => {
+        console.log(error);
+      })
+    },
     
+  },
+
+  mounted() {
+    this.getMyGroups();
+    this.getMyTasks();
+    this.getMyRooms();
+    this.getMyCircles();
+    this.getMyPosts();
+    this.getMyNotifys();
   }
 }
 </script>
@@ -293,12 +360,14 @@ export default {
   width: 100%;
   table-layout: fixed;
 }
-.chat-room-item {
-  width: 100% - 10px;
-  height: 85px;
+.notification-header {
+  width: calc(100% - 22px); 
+  height: 50px; 
   display: flex;
-  margin-bottom: -1px;
-  border: 1px solid rgba(217, 236, 255);
+  align-items: center; 
+  padding-left: 15px; 
+  font-size: 21px; 
+  border-left: 6px solid rgba(217, 236, 255);
 }
 .notification-bar .el-collapse-item__header {
   padding-left: 13px;
@@ -311,5 +380,15 @@ export default {
 }
 .notification-bar .el-collapse-item__content {
   padding: 0;
+}
+.diy-badge {
+  position: absolute; 
+  width: 10px; 
+  height: 10px; 
+  background-color: red; 
+  border-radius: 50%; 
+  z-index: 99; 
+  top: 10px; 
+  left: 85px;
 }
 </style>

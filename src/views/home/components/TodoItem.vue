@@ -1,16 +1,16 @@
 <template>
   <table class="table">
     <tr>
-      <td style="width: 25%;height: 70px;"><el-avatar :size="50" :src="circleUrl"></el-avatar></td>
+      <td style="width: 25%;height: 70px;"><el-avatar :size="50" :src="task.designatorAvatarSrc"></el-avatar></td>
       <td style="width: 75%;">
-        <h4 style="margin: 0;">{{ groupName }}</h4>
-        <p style="font-size:14px; margin: 0;">指派人:{{ taskDesignee }}</p>
-        <p style="font-size:14px; margin: 0;">任务结束时间:{{ taskEndDate }}</p>
+        <h4 style="margin: 0;">{{ task.taskName }}</h4>
+        <p style="font-size:14px; margin: 0;">指派人:{{ task.designatorName }}</p>
+        <p style="font-size:14px; margin: 0;">任务结束时间:{{ task.taskEndDate.split(" ")[0] }}</p>
       </td>
     </tr>
     <tr style="height: 50px; overflow: hidden;">
       <td colspan="2" class="detail-content">
-        &ensp;&ensp;&ensp;&ensp;任务描述:{{ taskDetail }}
+        &ensp;&ensp;&ensp;&ensp;任务描述:{{ task.taskDescription }}
       </td>
     </tr>
   </table>
@@ -21,14 +21,7 @@ export default {
   name: 'TodoItem',
 
   props: {
-    circleUrl: {
-      type: String,
-      default: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
-    },
-    groupName: String,
-    taskDesignee: String,
-    taskEndDate: String,
-    taskDetail: String
+    task: { type: Object }
   },
 
   data() {

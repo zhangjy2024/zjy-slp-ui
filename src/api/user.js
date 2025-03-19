@@ -29,7 +29,7 @@ export async function currentUserAsync() {
 /**
  * 获取当前登录用户信息
  */
-export async function currentUser() {
+export function currentUser() {
   return request({
     url: '/api/base/user/current/login',
     method: 'get'
