@@ -62,8 +62,8 @@
                   </el-carousel>
                 </div>
                 <el-descriptions style="padding: 10px;">
-                  <el-descriptions-item label="创建人">提瓦特之神</el-descriptions-item>
-                  <el-descriptions-item label="成员数" :span="2">24</el-descriptions-item>
+                  <el-descriptions-item label="创建人" :span="2">提瓦特之神</el-descriptions-item>
+                  <el-descriptions-item label="成员数" :span="1">24</el-descriptions-item>
                   <el-descriptions-item label="手机号" :span="3">18100000000</el-descriptions-item> 
                   <el-descriptions-item label="联系地址" :span="3">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
                   <el-descriptions-item label="组织详情" :span="3">组织详情</el-descriptions-item>
@@ -165,8 +165,8 @@
                     <div style="padding: 5px; width: 100%;">
                       <h2 style="margin: 0px; font-size: 22px;">任务名称</h2>
                       <div style="display: flex; margin-top: 3px;">
-                        <p style="margin: 0px; font-size: 14px; width: 40%;">指派人:指派人名称</p>
-                        <p style="margin: 0px; font-size: 14px; width: 60%;">结束时间:2025-5-10</p>
+                        <p style="margin: 0px; font-size: 14px; width: 40%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">指派人:指派人名称</p>
+                        <p style="margin: 0px; font-size: 14px; width: 60%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">结束时间:2025-5-10</p>
                       </div>
                     </div>
                   </div>
@@ -192,7 +192,7 @@
                     <div style="padding: 5px; width: 100%;">
                       <h2 style="margin: 0px; font-size: 22px;">资源名称</h2>
                       <div style="display: flex; margin-top: 3px;">
-                        <p style="margin: 0px; font-size: 14px; width: 40%;">上传者:上传者名称</p>
+                        <p style="margin: 0px; font-size: 14px; width: 40%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">上传者:上传者名称</p>
                         <p style="margin: 0px; font-size: 14px; width: 60%;">资源大小: 10MB</p>
                       </div>
                     </div>

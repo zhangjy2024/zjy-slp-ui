@@ -94,28 +94,36 @@
               <table style="width: calc(100% - 10px); margin: 0px 5px 2px; table-layout: fixed;">
                 <tr style="flex-wrap: nowrap;">
                   <td style="min-width: 100px; padding-left: 8px; display: flex;">
-                    <el-link style="font-size: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称aaaa啊啊啊啊啊啊啊啊a</el-link>
+                    <el-tooltip class="item" effect="light" content="圈子名称aaaa啊啊啊啊啊啊啊啊a" placement="top">
+                      <el-link style="font-size: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称aaaa啊啊啊啊啊啊啊啊a</el-link>
+                    </el-tooltip>
                     <i class="el-icon-medal-1" style="font-size: 24px; font-weight: bold; color: rgb(231, 168, 34); margin-top: 3px;"></i>
                   </td>
                   <td style="width: 80px; text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-qunzu" style="font-size: 20px; margin-right: 9px;"></i></td>
                 </tr>
                 <tr>
                   <td style="padding-left: 8px; display: flex;">
-                    <el-link style="font-size: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称啊啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                    <el-tooltip class="item" effect="light" content="圈子名称啊啊啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                      <el-link style="font-size: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称啊啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                    </el-tooltip>
                     <i class="el-icon-medal" style="font-size: 24px; font-weight: bold; color: rgb(200, 200, 200); margin-top: 3px;"></i>
                   </td>
                   <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-qunzu" style="font-size: 20px; margin-right: 9px;"></i></td>
                 </tr>
                 <tr>
                   <td style="padding-left: 8px; display: flex;">
-                    <el-link style="font-size: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                    <el-tooltip class="item" effect="light" content="圈子名称啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                      <el-link style="font-size: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                    </el-tooltip>
                     <i class="el-icon-medal" style="font-size: 24px; font-weight: bold; color: rgb(200, 136, 110); margin-top: 3px;"></i>
                   </td>
                   <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-qunzu" style="font-size: 20px; margin-right: 9px;"></i></td>
                 </tr>
                 <tr v-for="i in 7">
                   <td style="padding-left: 8px;">
-                    <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                    <el-tooltip class="item" effect="light" content="圈子名称啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                      <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">圈子名称啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                    </el-tooltip>
                   </td>
                   <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-qunzu" style="font-size: 20px; margin-right: 9px;"></i></td>
                 </tr>
@@ -130,25 +138,33 @@
             <table style="width: calc(100% - 10px); margin-bottom: 2px; margin-left: 10px;">
               <tr>
                 <td>
-                  <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                  <el-tooltip class="item" effect="light" content="话题名称啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                    <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                  </el-tooltip>
                 </td>
                 <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: red;"></i></td>
               </tr>
               <tr>
                 <td>
-                  <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                  <el-tooltip class="item" effect="light" content="话题名称啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                    <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                  </el-tooltip>
                 </td>
                 <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(242, 114, 71);"></i></td>
               </tr>
               <tr>
                 <td>
-                  <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊</el-link>
+                  <el-tooltip class="item" effect="light" content="话题名称啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                    <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊</el-link>
+                  </el-tooltip>
                 </td>
                 <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(247, 206, 170);"></i></td>
               </tr>
               <tr v-for="i in 7">
                 <td>
-                  <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                  <el-tooltip class="item" effect="light" content="话题名称啊啊啊啊啊啊啊啊啊啊啊" placement="top">
+                    <el-link style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#话题名称啊啊啊啊啊啊啊啊啊啊啊</el-link>
+                  </el-tooltip>
                 </td>
                 <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(200, 200, 200);"></i></td>
               </tr>

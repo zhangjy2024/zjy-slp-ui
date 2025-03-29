@@ -80,7 +80,7 @@
                           <i class="el-icon-tickets" style="font-size: 25px; margin: 5px;"></i>
                           {{ circles[0].postsNum }}
                         </div>
-                        <el-button type="primary" plain style="float: right; height: 40px;">签到</el-button>
+                        <!-- <el-button type="primary" plain style="float: right; height: 40px;">签到</el-button> -->
                       </div>                    
                     </div>
                     <div>
