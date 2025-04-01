@@ -6,3 +6,18 @@ export function getMyGroups() {
     method: 'get'
   })
 }
+
+export function getMiniGroups() {
+  return request({
+    url: '/api/base/groups/miniGroups',
+    method: 'get'
+  })
+}
+
+export function getGroupDetailById(param) {
+  return request({
+    url: '/api/base/groups/detail',
+    method: 'get',
+    params: param
+  })
+}

@@ -95,7 +95,7 @@
                           <i class="el-icon-chat-line-square"></i> {{ posts.commentsNum }}
                         </div>
                       </div>
-                      <div v-if="circles[0].postsList.length > 4" style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+                      <div v-if="circles[0].postsList?.length > 4" style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
                         <el-link style="font-size: 20px;">----------查看更多----------</el-link>
                       </div>
                     </div>
@@ -165,7 +165,7 @@ import { getMyTasks } from '@/api/groups/tasks';
 import { getMyRooms } from '@/api/contact/room';
 import { getMyCircles } from '@/api/square/circle';
 import { getMyPosts } from '@/api/square/posts';
-import { getMyNotifys } from '@/api/notify';
+import { getMyNotifies } from '@/api/notify';
 
 export default {
   name: 'HOMEIndex',
@@ -204,7 +204,7 @@ export default {
       tasks: [],
       groups: [],
       rooms: [],
-      circles: [],
+      circles: [{}],
       postsList: [],
 
       sysNotifyList: [],
@@ -291,8 +291,8 @@ export default {
       })
     },
 
-    getMyNotifys() {
-      getMyNotifys().then((res) => {
+    getMyNotifies() {
+      getMyNotifies().then((res) => {
         const { sysNotifyList, groupNotifyList, circleNotifyList } = res.data.data.reduce(
           (acc, item) => {
             if (item.groupId) {
@@ -323,7 +323,7 @@ export default {
     this.getMyRooms();
     this.getMyCircles();
     this.getMyPosts();
-    this.getMyNotifys();
+    this.getMyNotifies();
   }
 }
 </script>

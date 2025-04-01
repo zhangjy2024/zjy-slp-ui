@@ -6,7 +6,7 @@
       <div>群聊简介:{{ chatRoom.description }}</div>
     </div>
     <div style="margin: 15px; margin-left: auto;">
-      <div style="color: rgba(0, 0, 0, 0.4);">{{ chatRoom.createdDate.split(" ")[0] }}</div>
+      <div style="color: rgba(0, 0, 0, 0.4);">{{ chatRoom?.createdDate?.split(" ")[0] || "暂无时间"  }}</div>
     </div>
   </div>
 </template>

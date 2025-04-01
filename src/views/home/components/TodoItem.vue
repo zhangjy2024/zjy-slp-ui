@@ -5,7 +5,7 @@
       <td style="width: 75%;">
         <h4 style="margin: 0;">{{ task.taskName }}</h4>
         <p style="font-size:14px; margin: 0;">指派人:{{ task.designatorName }}</p>
-        <p style="font-size:14px; margin: 0;">任务结束时间:{{ task.taskEndDate.split(" ")[0] }}</p>
+        <p style="font-size:14px; margin: 0;">任务结束时间:{{ task?.taskEndDate?.split(" ")[0] || "暂无时间" }}</p>
       </td>
     </tr>
     <tr style="height: 50px; overflow: hidden;">

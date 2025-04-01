@@ -6,3 +6,12 @@ export function getMyTasks() {
     method: 'get'
   })
 }
+
+export function getGroupTasks(param) {
+  return request({
+    url: '/api/base/tasks/groupTasks',
+    method: 'get',
+    params: param
+  })
+}
+

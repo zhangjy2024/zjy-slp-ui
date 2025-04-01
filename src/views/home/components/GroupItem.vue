@@ -61,7 +61,7 @@
               prop="memberType"
               label="身份"
               width="130"
-              :filters="[{ text: '创建者', value: 'ADMIN' }, { text: '成员', value: 'USER' }]"
+              :filters="[{ text: '创建者', value: '创建者' }, { text: '用户', value: '用户' }]"
               :filter-method="filterTag"
               filter-placement="bottom-end">
               <template slot-scope="scope">
@@ -143,6 +143,7 @@ export default {
 
   methods: {
     filterTag(value, row) {
+      console.log(value)
       return row.tag === value;
     },
     getMemberTypeText(value) {

@@ -6,3 +6,11 @@ export function getMyRooms() {
     method: 'get'
   })
 }
+
+export function getGroupRooms(param) {
+  return request({
+    url: '/api/base/room/groupRooms',
+    method: 'get',
+    params: param
+  })
+}
