@@ -1,25 +1,31 @@
 <template>
   <el-card class="box-card groups-index-card" style="width: 100%; height: calc(100vh - 10px);">
     <div slot="header" class="clearfix">
-      <el-dropdown @command="handleCommand" v-loading="miniGroupsLoading">
-        <div class="el-dropdown-link" style="display: flex; background-color: rgb(236, 245, 255); padding: 6px; border-radius: 6px;">
-          <img :src="activeGroup.groupAvatarSrc" alt="组织头像" width="30px" height="30px" style="border: 1px solid rgb(160, 207, 255);" >
-          <div style="margin: auto 4px; font-size: 17px; color: black; width: 180px;">{{ activeGroup.name }}<i class="el-icon-arrow-down el-icon--right" style="float: right; margin-top: 6px;"></i></div>
+      <el-dropdown v-if="miniGroups.length != 0" @command="handleCommand" v-loading="miniGroupsLoading">
+        <div class="el-dropdown-link active-group-link">
+          <img :src="activeGroup.groupAvatarSrc" alt="组织头像" class="group-avatar">
+          <div class="group-name" style="width: 180px;">
+            {{ activeGroup.name }}<i class="el-icon-arrow-down el-icon--right" style="float: right; margin-top: 6px;"></i>
+          </div>
         </div>
-        <el-dropdown-menu slot="dropdown" class="groups-select-dropdown-menu" style="width: 231px; padding: 0px;">
+        <el-dropdown-menu slot="dropdown" class="groups-select-dropdown-menu">
           <el-dropdown-item v-for="group in miniGroups" :key="group.id" :command="group.id">
-            <div class="el-dropdown-link" style="display: flex; padding: 6px; border: 1px solid rgb(217, 236, 255); background-color: rgb(236, 245, 255);">
-              <img :src="group.groupAvatarSrc" alt="组织头像" width="30px" height="30px" style="border: 1px solid rgb(160, 207, 255);" >
-              <div style="margin: auto 4px; font-size: 17px; color: black;">{{ group.name }}</div>
+            <div class="el-dropdown-link group-link">
+              <img :src="group.groupAvatarSrc" alt="组织头像" class="group-avatar">
+              <div class="group-name">{{ group.name }}</div>
             </div>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+      <el-button v-else>添加组织</el-button>
       <div style="padding: 10px; float: right;">
         <el-button class="edit-button edit-module-button" type="text">编辑模块</el-button>
       </div>
     </div>
-    <table style="height: 100%; width: 100%; table-layout: fixed; margin-bottom: 18px;">
+    <div v-if="miniGroups.length == 0">
+      暂无组织
+    </div>
+    <table v-else class="group-main-table">
       <tr style="height: 50%;">
         <td style="width: 50%; overflow: hidden; padding: 10px;">
           <module-card
@@ -53,7 +59,7 @@
             v-loading="groupNotifyLoading"
           >
             <template v-slot:body>
-              <group-notify :groupNotifies="groupNotifies"></group-notify>
+              <group-notify v-for="groupNotify in groupNotifies" :key="groupNotify.id" :groupNotify="groupNotify"></group-notify>
               <div v-show="groupNotifies.length == 0" style="width: 100%; line-height: 90px; text-align: center;">暂无通知</div>
             </template>
           </module-card>
@@ -68,7 +74,8 @@
             v-loading="groupRoomLoading"
           >
             <template v-slot:body>
-              <group-rooms :groupRooms="groupRooms"></group-rooms>
+              <group-rooms v-for="groupRoom in groupRooms" :key="groupRoom.roomId" :groupRoom="groupRoom"></group-rooms>
+              <div v-show="groupRooms.length == 0" style="width: 100%; line-height: 90px; text-align: center;">暂无群聊</div>
             </template>
           </module-card>
         </td>
@@ -80,7 +87,8 @@
             v-loading="groupTasksLoading"
           >
             <template v-slot:body>
-              <group-tasks :groupTasks="groupTasks"></group-tasks>
+              <group-tasks v-for="groupTask in groupTasks" :key="groupTask.id" :groupTask="groupTask"></group-tasks>
+              <div v-show="groupTasks.length == 0" style="width: 100%; line-height: 90px; text-align: center;">暂无任务</div>
             </template>
           </module-card>
         </td>
@@ -92,7 +100,8 @@
             v-loading="groupResourcesLoading"
           >
           <template v-slot:body>
-            <group-resource :groupResources="groupResources"></group-resource>
+            <group-resource v-for="groupResource in groupResources" :key="groupResource.id" :groupResource="groupResource"></group-resource>
+            <div v-show="groupResources.length == 0" style="width: 100%; line-height: 90px; text-align: center;">暂无资源</div>
           </template>
         </module-card>
         </td>
@@ -171,6 +180,7 @@ export default {
     initMiniGroups() {
       this.miniGroupsLoading = true;
       getMiniGroups().then(res => {
+        if(res.data.data.length == 0) return;
         this.miniGroups = res.data.data;
         this.activeGroup = this.miniGroups[0];
         this.setCurrentGroup(this.activeGroup.id);
@@ -273,6 +283,28 @@ export default {
   cursor: pointer;
   color: #409EFF;
 }
+.group-link {
+  display: flex; 
+  padding: 6px; 
+  border: 1px solid rgb(217, 236, 255); 
+  background-color: rgb(236, 245, 255);
+}
+.active-group-link {
+  display: flex; 
+  background-color: rgb(236, 245, 255); 
+  padding: 6px; 
+  border-radius: 6px;
+}
+.group-avatar {
+  width: 30px; 
+  height: 30px;
+  border: 1px solid rgb(160, 207, 255);
+}
+.group-name {
+  margin: auto 4px; 
+  font-size: 17px; 
+  color: black; 
+}
 .el-icon-arrow-down {
   font-size: 12px;
 }
@@ -285,11 +317,21 @@ export default {
   padding: 5px;
   overflow-y: auto;
 }
+.groups-select-dropdown-menu {
+  width: 231px; 
+  padding: 0px;
+}
 .groups-select-dropdown-menu .el-dropdown-menu__item {
   padding: 0px;
 }
 .edit-button :hover {
   color: rgb(100, 100, 100);
+}
+.group-main-table {
+  height: 100%; 
+  width: 100%; 
+  table-layout: fixed; 
+  margin-bottom: 18px;
 }
 .el-table__body-wrapper {
   overflow-y: auto;
