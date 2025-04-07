@@ -35,3 +35,11 @@ export function currentUser() {
     method: 'get'
   })
 }
+
+export function getFriendInfo(param) {
+  return request({
+    url: '/api/base/user/friend',
+    method: 'get',
+    params: param,
+  })
+}

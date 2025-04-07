@@ -7,18 +7,18 @@
       <el-table-column
         prop="createdDate"
         label="加入日期"
-        width="160"
+        width="110"
         :formatter="formatDate">
       </el-table-column>
       <el-table-column
         prop="memberName"
         label="姓名"
-        width="190"
         :show-overflow-tooltip="true">
       </el-table-column>
       <el-table-column
         prop="memberType"
         label="成员身份"
+        width="90"
         :show-overflow-tooltip="true">
         <template slot-scope="scope">
           <el-tag

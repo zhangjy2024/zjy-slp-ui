@@ -1,12 +1,12 @@
 <template>
   <div style="margin-top: 10px;">
-    <div v-for="notify in groupNotifies" :key="notify.id" class="notify-item">
+    <div class="notify-item">
       <div class="notify-content" style="width: 75px; height: 87px;">
-        <img :src="notify.fromUserAvatarSrc" alt="用户头像" class="user-avatar">
+        <img :src="groupNotify.fromUserAvatarSrc" alt="用户头像" class="user-avatar">
       </div>
       <div class="notify-content" style="flex: 1">
-        <h3 style="margin: 0px; margin-top: 10px;">{{ notify.title }}</h3>
-        <p class="notify-content-text">{{ notify.text }}</p>
+        <h3 style="margin: 0px; margin-top: 10px;">{{ groupNotify.title }}</h3>
+        <p class="notify-content-text">{{ groupNotify.text }}</p>
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@
 export default {
   name: 'GroupNotify',
   props: {
-    groupNotifies: {type: Array},
+    groupNotify: {type: Object},
   }
 }
 </script>

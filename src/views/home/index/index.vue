@@ -28,6 +28,9 @@
                 :key="task.id"
                 :task="task"
               ></todo-item>
+              <div v-if="tasks.length == 0">
+                所有任务都完成啦！
+              </div>
             </div>
           </template>
         </module-card>
@@ -36,7 +39,10 @@
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的组织" icon="el-icon-office-building" width="95%" height="400px">
                 <template v-slot:body>
-                  <div v-loading="myGroupsLoading" class="block">
+                  <div v-if="groups.length == 0">
+                    暂无组织
+                  </div>
+                  <div v-else v-loading="myGroupsLoading" class="block">
                     <el-carousel trigger="click" :autoplay="false" style="height: 370px;">
                       <el-carousel-item v-for="group in groups" :key="group.id" style="height: 370px;">
                         <group-item :group="group"></group-item>
@@ -49,7 +55,10 @@
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的群聊" icon="el-icon-chat-dot-square" width="95%" height="400px" v-loading="myRoomsLoading">
                 <template v-slot:body>
-                  <div style="margin-top: 7px; height: 370px; overflow: hidden; overflow-y: auto;">
+                  <div v-if="rooms.length == 0">
+                    暂无群聊
+                  </div>
+                  <div v-else style="margin-top: 7px; height: 370px; overflow: hidden; overflow-y: auto;">
                     <chat-room-item v-for="room in rooms" :key="room.id" :chatRoom="room"></chat-room-item>
                   </div>
                 </template>
@@ -58,15 +67,12 @@
           </tr>
           <tr>
             <td style="width: 50%; overflow: hidden;">
-              <module-card
-                title="我的圈子"
-                icon="el-icon-discover"
-                :divider="true"
-                width="95%"
-                height="400px"
-                v-loading="myCirclesLoading">
+              <module-card title="我的圈子" icon="el-icon-discover" :divider="true" width="95%" height="400px" v-loading="myCirclesLoading">
                 <template v-slot:body>
-                  <div style="width: calc(100% - 10px); height: calc(100% - 300px);">
+                  <div v-if="circles.length == 0">
+                    暂无圈子
+                  </div>
+                  <div v-else style="width: calc(100% - 10px); height: calc(100% - 300px);">
                     <div style="display: flex; padding: 0px 10px 5px;">
                       <img :src="circles[0].circleAvatarSrc" alt="圈子头像" width="70px" height="70px">
                       <div>
@@ -100,13 +106,17 @@
                       </div>
                     </div>
                   </div>
+                  
                 </template>
               </module-card>
             </td>
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的文章" icon="el-icon-document" :divider="true" width="95%" height="400px" v-loading="myPostsLoading">
                 <template v-slot:body>
-                  <div style="width: calc(100% - 10px); height: 350px; overflow: hidden; overflow-y: auto;">
+                  <div v-if="postsList.length == 0">
+                    暂无文章
+                  </div>
+                  <div v-else style="width: calc(100% - 10px); height: 350px; overflow: hidden; overflow-y: auto;">
                     <posts-item v-for="posts in postsList" :posts="posts"></posts-item>
                   </div>
                 </template>

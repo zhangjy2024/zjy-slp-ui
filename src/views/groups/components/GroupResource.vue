@@ -1,18 +1,18 @@
 <template>
   <div style="margin-top: 10px;">
-    <div v-for="resource in groupResources" class="resource-item">
+    <div class="resource-item">
       <div style="display: flex;">
-        <img :src="resource.adminAvatarSrc" alt="上传者头像" class="user-avatar">
+        <img :src="groupResource.adminAvatarSrc" alt="上传者头像" class="user-avatar">
         <div style="padding: 5px; width: 100%;">
-          <h2 style="margin: 0px; font-size: 22px;">{{ resource.resourceName }}</h2>
+          <h2 style="margin: 0px; font-size: 22px;">{{ groupResource.resourceName }}</h2>
           <div style="display: flex; margin-top: 3px;">
-            <p style="margin: 0px; font-size: 14px; width: 40%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">上传者：{{ resource.adminName }}</p>
-            <p style="margin: 0px; font-size: 14px; width: 60%;">资源大小: {{ resource.resourceSize }}MB</p>
+            <p style="margin: 0px; font-size: 14px; width: 40%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">上传者：{{ groupResource.adminName }}</p>
+            <p style="margin: 0px; font-size: 14px; width: 60%;">资源大小: {{ groupResource.resourceSize }}MB</p>
           </div>
         </div>
       </div>
       <p class="resource-desc">
-        &ensp;&ensp;&ensp;&ensp;资源描述：{{ resource.description }}
+        &ensp;&ensp;&ensp;&ensp;资源描述：{{ groupResource.description }}
       </p>
     </div>
   </div>
@@ -22,7 +22,7 @@
 export default {
   name: 'GroupResource',
   props: {
-    groupResources: {type: Array}
+    groupResource: {type: Object}
   }
 }
 </script>
