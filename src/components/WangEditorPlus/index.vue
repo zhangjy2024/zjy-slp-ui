@@ -1,6 +1,6 @@
 <!--WangEditor封装-->
 <template>
-  <div class="editor-plus" :style="{ height: height }">
+  <div class="editor-plus" :class="{ 'no-border': model === 'read' }" :style="{ height: height }">
     <!-- 工具栏 -->
     <Toolbar
       v-show="model==='edit'"
@@ -12,7 +12,7 @@
 
     <!-- 编辑器 -->
     <Editor
-      style="flex: 1; overflow-y: auto;"
+      style="flex: 1; overflow-y: auto; min-height: 300px;"
       :defaultConfig="editorConfig"
       v-model="html"
       @onCreated="onCreated"
@@ -86,7 +86,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .editor-plus{
   border: 2px solid #eff0f0;
   border-radius: 4px;
@@ -94,7 +94,9 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
+.editor-plus.no-border {
+  border: none !important;  /* 在read模式下去掉边框 */
+}
 
 .custom-wang-editor{
   ::v-deep .w-e-bar-divider{

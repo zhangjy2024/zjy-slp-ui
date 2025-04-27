@@ -45,7 +45,10 @@
         <div class="info-header">
           <img src="../../home/img/组织头像.png" alt="用户头像" class="info-avatar">
           <div>
-            <h3 class="info-header-text">{{ user.sex }} {{ user.remark }}</h3>
+            <h3 class="info-header-text">
+              <i :class="iconClass" style="font-weight: 700;"></i>
+              {{ user.remark }}
+            </h3>
             <p class="info-header-text">用户名：{{ user.userName }}</p>
           </div>
         </div>
@@ -92,6 +95,9 @@ export default {
     currentUserId() {
       return JSON.parse(sessionStorage.getItem('user_info') || '{}').id;
     },
+    iconClass() {
+      return this.user.sex === 'W' ? 'el-icon-female' : 'el-icon-male';
+    }
   },
   watch: {
     currentFriendId: {

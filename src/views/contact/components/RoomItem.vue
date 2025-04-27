@@ -6,7 +6,7 @@
     <div style="width: calc(100% - 140px);">
       <h3 style="margin: 1px 4px;">{{ room.roomName }}</h3>
       <p class="message-text">{{ room.newMessageUserName }}: {{ room.newMessageText }}</p>
-    </div>              
+    </div>
     <div style="margin: 3px; margin-left: auto;">
       <el-badge :value="room.unreadMessageNum" class="item" style="margin-left: 60px;"></el-badge>
       <div style="color: rgba(0, 0, 0, 0.4); text-align: right;">{{ room.newMessageDate?.split(' ')[0] }}</div>

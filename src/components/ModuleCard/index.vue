@@ -9,7 +9,7 @@
     @mouseover="isHovered = true"
     @mouseleave="isHovered = false"
   >
-    <div class="header">
+    <div class="header" @click="internalClick">
       <i v-if="icon" :class="icon" style="display: inline; font-weight: bold;"></i>
       <div class="title">
         {{ title }}
@@ -62,6 +62,9 @@ export default {
     }
   },
   methods: {
+    internalClick() {
+      this.$emit('click');
+    },
     removeById() {
       alert("将自定义面板卡片ID列表存入本地，记得回去改登录页面，清空本地Storage的时候不要全清了")
     }

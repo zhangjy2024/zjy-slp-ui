@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table" @click="toDetail">
     <tr>
       <td style="width: 25%;height: 70px;"><el-avatar :size="50" :src="task.designatorAvatarSrc"></el-avatar></td>
       <td style="width: 75%;">
@@ -13,6 +13,7 @@
         &ensp;&ensp;&ensp;&ensp;任务描述:{{ task.taskDescription }}
       </td>
     </tr>
+    <img src="../img/finished.png" alt="已完成" style="width: 80px; position: absolute; top: 0px; right: 10px;">
   </table>
 </template>
 
@@ -28,6 +29,11 @@ export default {
     return {
 
     }
+  },
+  methods: {
+    toDetail() {
+      this.$emit('click');
+    }
   }
 }
 </script>
@@ -36,6 +42,7 @@ export default {
 .table {
   width: 263px;
   height: 135px;
+  position: relative;
   padding: 5px;
   margin: 0px;
   border-radius: 4%;
