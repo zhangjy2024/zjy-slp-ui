@@ -2,6 +2,7 @@
 <template>
   <div class="home-index">
     <el-row :gutter="0">
+      <!-- 个人资料 -->
       <el-col :span="24" style="padding: 0;">
         <module-card
           width="100% - 20px"
@@ -20,13 +21,14 @@
     <el-row :gutter="0">
       <el-col :span="18" style="padding: 0;">
         <module-card title="我的待办" icon="el-icon-s-order" :divider="true" width="100% - 20px" height="325px" v-loading="myTasksLoading">
-          <el-button slot="header" @click="openTodoDetail" type="text" style="float: right; padding: 5px">更多</el-button>
+          <el-button slot="header" @click="openTodoList" type="text" style="float: right; padding: 5px">更多</el-button>
           <template v-slot:body>
-            <div class="todoItems">
+            <div class="todo-items">
               <todo-item
                 v-for="task in tasks"
                 :key="task.id"
                 :task="task"
+                @click="toTaskDetail(task.id)"
               ></todo-item>
               <div v-if="tasks.length == 0">
                 所有任务都完成啦！
@@ -34,7 +36,7 @@
             </div>
           </template>
         </module-card>
-        <table class="moduleTable">
+        <table class="module-table">
           <tr>
             <td style="width: 50%; overflow: hidden;">
               <module-card title="我的组织" icon="el-icon-office-building" width="95%" height="400px">
@@ -160,6 +162,12 @@
         </div>
       </el-col>
     </el-row>
+    <notify-detail
+      :visible.sync="dialogVisible"
+      :notification="currentNotification"
+      @confirm="handleNotificationConfirm"
+      @clear="handleNotificationClear"
+    />
   </div>
 </template>
 
@@ -170,6 +178,7 @@ import GroupItem from '../components/GroupItem.vue';
 import ChatRoomItem from '../components/ChatRoomItem.vue';
 import PostsItem from '../components/PostsItem.vue';
 import NotifyItem from '../components/NotifyItem.vue';
+import NotifyDetail from '../components/NotifyDetail.vue'
 import { getMyGroups } from '@/api/groups/groups';
 import { getMyTasks } from '@/api/groups/tasks';
 import { getMyRooms } from '@/api/contact/room';
@@ -180,7 +189,7 @@ import { getMyNotifies } from '@/api/notify';
 export default {
   name: 'HOMEIndex',
 
-  components: { ModuleCard, TodoItem, GroupItem, ChatRoomItem, PostsItem, NotifyItem },
+  components: { ModuleCard, TodoItem, GroupItem, ChatRoomItem, PostsItem, NotifyItem, NotifyDetail },
 
   computed: {
     userInfo() {
@@ -221,12 +230,45 @@ export default {
       groupNotifyList: [],
       circleNotifyList: [],
       
+      dialogVisible: false,
+      currentNotification: {
+        id: '123',
+        type: 'org',
+        senderName: '张经理',
+        senderAvatar: 'https://example.com/avatar.jpg',
+        title: '关于下周项目评审的通知',
+        content: '请各位团队成员准备好项目进展报告，下周一上午10点在会议室进行项目中期评审。\n\n需要准备材料：\n1. 项目进度报告\n2. 遇到的问题及解决方案\n3. 下一阶段计划',
+        sendTime: new Date(),
+        confirmed: false
+      }
     }
   },
 
   methods: {
-    openTodoDetail() {
+    openTodoList() {
       this.$router.replace('/home/todo')
+    },
+    toTaskDetail(taskId) {
+      this.$router.push({
+        name: 'ToDoDetail',
+        query: {
+          id: taskId
+        },
+      });
+    },
+    handleNotificationConfirm(id, withClear) {
+      this.$message.success(`通知${id}已确认${withClear ? '并清除' : ''}`)
+      // 这里调用API更新通知状态
+      if (withClear) {
+        this.dialogVisible = false
+      } else {
+        this.currentNotification.confirmed = true
+      }
+    },
+    handleNotificationClear(id) {
+      this.$message.success(`通知${id}已清除`)
+      this.dialogVisible = false
+      // 这里调用API清除通知
     },
 
     clearBadge(notifyId, notifyType) {
@@ -235,15 +277,14 @@ export default {
         c: this.circleNotifyList,
         s: this.sysNotifyList
       };
-
       const notifyList = notifyLists[notifyType];
-      
       if (notifyList) {
         const index = notifyList.findIndex(notify => notify.id === notifyId);
         if (index !== -1) {
           this.$set(notifyList[index], 'gotIt', 'Y');
         }
       }
+      this.dialogVisible = true
     },
 
     getMyGroups() {
@@ -256,7 +297,6 @@ export default {
         this.myGroupsLoading = false;
       })
     },
-
     getMyTasks() {
       this.myTasksLoading = true;
       getMyTasks().then((res) => {
@@ -267,7 +307,6 @@ export default {
         this.myTasksLoading = false;
       })
     },
-
     getMyRooms() {
       this.myRoomsLoading = true;
       getMyRooms().then((res) => {
@@ -278,7 +317,6 @@ export default {
         this.myRoomsLoading = false;
       })
     },
-
     getMyCircles() {
       this.myCirclesLoading = true;
       getMyCircles().then((res) => {
@@ -289,7 +327,6 @@ export default {
         this.myCirclesLoading = false;
       })
     },
-
     getMyPosts() {
       this.myPostsLoading = true;
       getMyPosts().then((res) => {
@@ -300,7 +337,6 @@ export default {
         this.myPostsLoading = false;
       })
     },
-
     getMyNotifies() {
       getMyNotifies().then((res) => {
         const { sysNotifyList, groupNotifyList, circleNotifyList } = res.data.data.reduce(
@@ -338,27 +374,27 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .home-index {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-.el-row {
+::v-deep .el-row {
   margin-bottom: 5px;
   &:last-child {
     margin-bottom: 0;
   }
 }
-.el-col {
+::v-deep .el-col {
   padding: 0px;
   border-radius: 4px;
 }
 .block {
   margin: auto 0px;
 }
-.todoItems {
+.todo-items {
   height: 90% - 20px;
   padding: 5px;
   display: grid;
@@ -366,7 +402,7 @@ export default {
   justify-content: space-between;
   grid-template-columns: repeat(auto-fill, minmax(263px, 263px));
 }
-.moduleTable {
+.module-table {
   width: 100%;
   table-layout: fixed;
 }
@@ -379,16 +415,16 @@ export default {
   font-size: 21px; 
   border-left: 6px solid rgba(217, 236, 255);
 }
-.notification-bar .el-collapse-item__header {
+::v-deep .notification-bar .el-collapse-item__header {
   padding-left: 13px;
 }
-.el-collapse-item__header {
+::v-deep .el-collapse-item__header {
   font-size: 18px;
 }
 .home-notify-item:hover .home-notify-content {
   background-color: rgb(236, 245, 255);
 }
-.notification-bar .el-collapse-item__content {
+::v-deep .notification-bar .el-collapse-item__content {
   padding: 0;
 }
 .diy-badge {

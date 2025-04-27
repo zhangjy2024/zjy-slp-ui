@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 10px;">
+  <div style="margin-top: 10px;" >
     <div class="notify-item">
       <div class="notify-content" style="width: 75px; height: 87px;">
         <img :src="groupNotify.fromUserAvatarSrc" alt="用户头像" class="user-avatar">
@@ -17,6 +17,8 @@ export default {
   name: 'GroupNotify',
   props: {
     groupNotify: {type: Object},
+  },
+  methods: {
   }
 }
 </script>

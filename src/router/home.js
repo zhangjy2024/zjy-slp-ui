@@ -17,6 +17,16 @@ export default {
       path: '/home/todo',
       name: 'ToDo',
       component: () => import('@/views/home/todo'),
-    }
+    },
+    {
+      path: '/home/todo/detail',
+      name: 'ToDoDetail',
+      component: () => import('@/views/home/todo/detail'),
+      props(route){
+        return {
+          id: route.query.id
+        }
+      }
+    },
   ]
 }

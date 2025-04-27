@@ -382,49 +382,49 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .contact-index {
   height: calc(100vh - 10px);
   background-color: white;
 }
-.el-tabs__content{
+::v-deep .el-tabs__content{
   height: calc(100% - 80px);
   overflow-y: auto;
 }
-.clearfix:before,
-.clearfix:after {
+::v-deep .clearfix:before,
+::v-deep .clearfix:after {
   display: table;
   content: "";
 }
-.clearfix:after {
+::v-deep .clearfix:after {
   clear: both
 }
-.el-card__header {
+::v-deep .el-card__header {
   padding: 10px;
   border-bottom: 2px solid rgb(217, 236, 255);
   background-color: rgba(247, 247, 247, 1);
 }
-.button-icon i {
+::v-deep .button-icon i {
   font-size: 30px !important;
   font-weight: bold;
 }
-.el-card__body {
+::v-deep .el-card__body {
   padding: 0px;
   height: calc(100% - 40px);
   overflow-y: auto;
 }
-.el-textarea__inner {
+::v-deep .el-textarea__inner {
   border: 0;
   resize: none;
 }
-.el-textarea__inner{
+::v-deep .el-textarea__inner{
  font-family:"Microsoft" !important;
  font-size:16px !important;
 }
-.el-collapse-item__header {
+::v-deep .el-collapse-item__header {
   font-size: 18px;
 }
-.el-collapse-item__content {
+::v-deep .el-collapse-item__content {
   padding: 0px;
 }
 .search-results-card {

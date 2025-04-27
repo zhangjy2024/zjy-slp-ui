@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding: 0px 20px; background-color: white;">
     <el-page-header @back="goBack" content="发布文章" style="width: 100%; height: 60px; background-color: white;"></el-page-header>
     <div style="display: flex; justify-content: center;">
       <div style="width: calc(100% - 100px); height: calc(100vh - 170px); background-color: white; padding: 20px; margin-top: 20px;">
@@ -52,7 +52,6 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import WangEditorPlus from "@/components/WangEditorPlus/index.vue";
 
 export default {
@@ -102,8 +101,8 @@ export default {
 }
 </script>
 
-<style>
-.el-tag + .el-tag {
+<style scoped>
+::v-deep .el-tag + .el-tag {
   margin-left: 10px;
 }
 .button-new-tag {
@@ -118,11 +117,11 @@ export default {
   margin-left: 10px;
   vertical-align: bottom;
 }
-.el-page-header__title, .el-page-header__content {
+::v-deep .el-page-header__title,::v-deep .el-page-header__content {
   display: flex;
   align-items: center;
 }
-.el-page-header__left {
+::v-deep.el-page-header__left {
   padding-left: 15px;
 }
 </style>
