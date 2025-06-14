@@ -43,11 +43,11 @@
       </div>
       <div class="contact-info" v-loading="infoLoading" v-show="rightMenu">
         <div class="info-header">
-          <img src="../../home/img/组织头像.png" alt="用户头像" class="info-avatar">
+          <img :src="avatar" alt="用户头像" class="info-avatar">
           <div>
             <h3 class="info-header-text">
               <i :class="iconClass" style="font-weight: 700;"></i>
-              {{ user.remark }}
+              {{ user.remark ? user.remark : user.userName }}
             </h3>
             <p class="info-header-text">用户名：{{ user.userName }}</p>
           </div>

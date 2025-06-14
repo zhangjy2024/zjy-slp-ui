@@ -260,7 +260,8 @@ export default {
       this.$message.success(`通知${id}已确认${withClear ? '并清除' : ''}`)
       // 这里调用API更新通知状态
       if (withClear) {
-        this.dialogVisible = false
+        this.dialogVisible = false;
+        this.circleNotifyList.pop();
       } else {
         this.currentNotification.confirmed = true
       }

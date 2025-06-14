@@ -6,3 +6,10 @@ export function getMyPosts() {
     method: 'get'
   })
 }
+
+export function getPostsDetail() {
+  return request({
+    url: '/api/base/square/posts/detail',
+    method: 'get'
+  })
+}

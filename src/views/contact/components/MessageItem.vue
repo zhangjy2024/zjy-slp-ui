@@ -1,7 +1,10 @@
 <template>
   <div class="message">
     <img v-if="!IsMy" :src="avatar == undefined ? message.fromUserAvatarSrc : avatar" alt="好友头像" class="user-avatar">
-    <div class="text" :class="IsMy ? 'my' : ''">{{ message.text }}</div>
+    <div :class="IsMy ? 'my' : ''">
+      <div v-if="message.userName" style="margin: 2px 12px;">{{ message.userName }}</div>
+      <div class="text" :class="IsMy ? 'my-text' : ''">{{ message.text }}</div>
+    </div>
     <img v-if="IsMy" :src="currentUserAvatar" alt="好友头像" class="user-avatar">
   </div>
 </template>
@@ -58,6 +61,8 @@ export default {
 .my {
   margin-right: 10px; 
   margin-left: auto;
+}
+.my-text {
   background-color: rgb(217, 236, 255);
 }
 .user-avatar {

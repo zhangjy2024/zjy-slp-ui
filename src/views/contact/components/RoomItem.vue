@@ -1,7 +1,7 @@
 <template>
   <div @click="$emit('click')" class="room-item">
     <div style="width: 50px; height: 50px;">
-      <img :src="room.roomAvatarSrc" alt="用户头像">
+      <img :src="room.roomAvatarSrc" alt="用户头像" style="width: 100%; height: 100%;">
     </div>
     <div style="width: calc(100% - 140px);">
       <h3 style="margin: 1px 4px;">{{ room.roomName }}</h3>

@@ -46,8 +46,31 @@
             @click.native="viewPostDetail(post.id)"
           /> -->
 
-          <posts-item v-for="i in 7"></posts-item>
-          
+          <posts-item></posts-item>
+          <div class="posts-card" style="width: calc(100% - 60px); height: 180px; margin: 10px 5px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+              <div style="display: flex;">
+                <img src="../../home/img/组织头像.png" alt="发布者头像" style="width: 54px; height: 54px; border-radius: 50%; margin: 12px 12px 0px;">
+                <div>
+                  <div style="display: flex;">
+                    <h3 style="margin: 5px 5px 0; margin-top: 13px;">testUser</h3>
+                    <!-- <div>图标</div> -->
+                  </div>
+                  <div style="display: flex;">
+                    <!-- <div>图标</div> -->
+                    <p style="margin: 5px;">前端开发交流</p>
+                  </div>
+                </div>
+                <div style="height: 50px;margin-top: 17px; margin-left: auto; display: flex;">
+                  <p style="margin: 10px 0px;">1279</p> <i class="el-icon-view" style="font-size: 24px; margin: 10px 5px; margin-right: 15px;"></i>
+                  <p style="margin: 10px 0px;">132</p> <i class="iconfont icon-like" style="font-size: 23px; margin: 10px 5px; margin-right: 15px;"></i>
+                  <p style="margin: 10px 0px;">124</p> <i class="el-icon-chat-line-square" style="font-size: 24px; margin: 9px 5px; margin-right: 15px;"></i>
+                </div>
+              </div>
+              <div style="margin: 0px 15px;">
+                <h2 style="margin: 2px; font-size: 23px;">前端开发交流圈建立啦，快来加入我们吧！</h2>
+                <p style="margin: 2px;">每天分享前端开发经验，助力知识共享共同进步！</p>
+              </div>
+            </div>
           <el-empty v-if="posts.length === 0" description="暂无文章"></el-empty>
         </template>
       </div>

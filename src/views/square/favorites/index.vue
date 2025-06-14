@@ -4,7 +4,6 @@
     
     <div class="favorites-list">
       <posts-item 
-        v-for="i in 4"
       />
       <el-empty v-if="favoritesPosts.length === 0" description="暂无浏览历史"></el-empty>
     </div>

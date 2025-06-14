@@ -9,25 +9,25 @@
                 <img src="../../home/img/组织头像.png" alt="圈子头像" style="width: 50px; height: 50px; border-radius: 50%; display: block; margin: 0px auto;">
                 <h5 style="display: block; margin: 6px auto; text-align: center; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">广场主页</h5>
               </div>
-              <div v-for="i in 3" @click="activeCircle(i)" :class="{ activeCircle: activeCircleIndex === i }" style="width: 90px; height: calc(100% - 24px); background-color: rgba(240, 240, 240); margin: 6px 10px; padding: 6px 10px; border-radius: 6px;">
+              <div @click="activeCircle(i)" :class="{ activeCircle: activeCircleIndex === i }" style="width: 90px; height: calc(100% - 24px); background-color: rgba(240, 240, 240); margin: 6px 10px; padding: 6px 10px; border-radius: 6px;">
                 <img src="../../home/img/组织头像.png" alt="圈子头像" style="width: 50px; height: 50px; border-radius: 50%; display: block; margin: 0px auto;">
-                <h5 style="display: block; margin: 6px auto; text-align: center; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">圈子名称圈子名称圈子名称圈子名称</h5>
+                <h5 style="display: block; margin: 6px auto; text-align: center; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">前端开发交流</h5>
               </div>
             </div>
           </div>
           <div v-loading="false" class="square-body" style="display: flex; justify-content: center; flex-wrap: wrap; width: 100%;">
-            <posts-item v-for="i in 5"></posts-item>
-            <div v-for="i in 4" class="posts-card" style="width: calc(100% - 60px); height: 180px; margin: 10px 5px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+            <posts-item></posts-item>
+            <div class="posts-card" style="width: calc(100% - 60px); height: 180px; margin: 10px 5px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
               <div style="display: flex;">
                 <img src="../../home/img/组织头像.png" alt="发布者头像" style="width: 54px; height: 54px; border-radius: 50%; margin: 12px 12px 0px;">
                 <div>
                   <div style="display: flex;">
-                    <h3 style="margin: 5px 5px 0; margin-top: 13px;">发布者名称</h3>
-                    <div>图标</div>
+                    <h3 style="margin: 5px 5px 0; margin-top: 13px;">testUser</h3>
+                    <!-- <div>图标</div> -->
                   </div>
                   <div style="display: flex;">
-                    <div>图标</div>
-                    <p style="margin: 5px;">发布者标签</p>
+                    <!-- <div>图标</div> -->
+                    <p style="margin: 5px;">前端开发交流</p>
                   </div>
                 </div>
                 <div style="height: 50px;margin-top: 17px; margin-left: auto; display: flex;">
@@ -37,8 +37,8 @@
                 </div>
               </div>
               <div style="margin: 0px 15px;">
-                <h2 style="margin: 2px; font-size: 23px;">文章题目</h2>
-                <p style="margin: 2px;">文章简略内容</p>
+                <h2 style="margin: 2px; font-size: 23px;">前端开发交流圈建立啦，快来加入我们吧！</h2>
+                <p style="margin: 2px;">每天分享前端开发经验，助力知识共享共同进步！</p>
               </div>
             </div>
             <div style="width: 100%; height: 30px;"></div>
@@ -81,14 +81,14 @@
                 </td>
                 <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ circleList[2].memberNum }} <i class="iconfont icon-qunzu" style="font-size: 20px; margin-right: 9px;"></i></td>
               </tr>
-              <tr v-for="item in circleList.slice(3)" :key="item.id">
+              <!-- <tr v-for="item in circleList.slice(3)" :key="item.id">
                 <td style="padding-left: 8px;">
                   <el-tooltip class="item" effect="light" :content="item.name" placement="top">
                     <el-link @click="handleCircleRowClick(item)" style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">{{ item.name }}</el-link>
                   </el-tooltip>
                 </td>
                 <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ item.memberNum }} <i class="iconfont icon-qunzu" style="font-size: 20px; margin-right: 9px;"></i></td>
-              </tr>
+              </tr> -->
             </table>
           </div>
         </div>
@@ -105,7 +105,7 @@
                   <el-link @click="handleTopicRowClick(topicList[0])" style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#{{ topicList[0].name }}</el-link>
                 </el-tooltip>
               </td>
-              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: red;"></i></td>
+              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ topicList[0].postsNum }} <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: red;"></i></td>
             </tr>
             <tr>
               <td>
@@ -113,7 +113,7 @@
                   <el-link @click="handleTopicRowClick(topicList[1])" style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#{{ topicList[1].name }}</el-link>
                 </el-tooltip>
               </td>
-              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(242, 114, 71);"></i></td>
+              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ topicList[1].postsNum }} <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(242, 114, 71);"></i></td>
             </tr>
             <tr>
               <td>
@@ -121,7 +121,7 @@
                   <el-link @click="handleTopicRowClick(topicList[2])" style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#{{ topicList[2].name }}</el-link>
                 </el-tooltip>
               </td>
-              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(247, 206, 170);"></i></td>
+              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ topicList[2].postsNum }} <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(247, 206, 170);"></i></td>
             </tr>
             <tr v-for="item in topicList.slice(3)">
               <td>
@@ -129,7 +129,7 @@
                   <el-link @click="handleTopicRowClick(item)" style="font-size: 18px; line-height: 29px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; overflow: hidden;">#{{ item.name }}</el-link>
                 </el-tooltip>
               </td>
-              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">1234 <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(200, 200, 200);"></i></td>
+              <td style="text-align: right; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">{{ item.postsNum }} <i class="iconfont icon-icon" style="font-size: 23px; font-weight: bold; margin-right: 14px; color: rgb(200, 200, 200);"></i></td>
             </tr>
           </table>
         </div>
@@ -139,7 +139,6 @@
 </template>
 
 <script>
-import router from '@/router';
 import PostsItem from '@/views/square/components/PostsItem.vue';
 
 export default {
@@ -152,81 +151,51 @@ export default {
       circleList: [
         {
           id: 1,
-          name: '圈子名称',
-          memberNum: 123
+          name: '前端开发交流',
+          memberNum: 1245
         },
         {
           id: 2,
-          name: '圈子名称',
-          memberNum: 123
+          name: '产品经理俱乐部',
+          memberNum: 892
         },
         {
           id: 3,
-          name: '圈子名称',
-          memberNum: 123
-        },
-        {
-          id: 4,
-          name: '圈子名称',
-          memberNum: 123
-        },
-        {
-          id: 5,
-          name: '圈子名称',
-          memberNum: 123
-        },
-        {
-          id: 6,
-          name: '圈子名称',
-          memberNum: 123
-        },
-        {
-          id: 7,
-          name: '圈子名称',
-          memberNum: 123
-        },
-        {
-          id: 8,
-          name: '圈子名称',
-          memberNum: 123
+          name: '设计师交流圈',
+          memberNum: 765
         },
       ],
       topicList: [
         {
           id: 1,
-          name: '话题名称',
-          postsNum: 123
+          name: 'Vue.js',
+          postsNum: 1245
         },
         {
           id: 1,
-          name: '话题名称',
-          postsNum: 123
+          name: 'React',
+          postsNum: 987
         },
         {
           id: 1,
-          name: '话题名称',
-          postsNum: 123
+          name: '前端性能优化',
+          postsNum: 765
         },
         {
           id: 1,
-          name: '话题名称',
-          postsNum: 123
+          name: 'TypeScript',
+          postsNum: 543
         },
         {
           id: 1,
-          name: '话题名称',
-          postsNum: 123
+          name: 'Node.js',
+          postsNum: 423
         },
         {
           id: 1,
-          name: '话题名称',
-          postsNum: 123
+          name: 'WebPack',
+          postsNum: 312
         },
-        {
-          id: 1,
-          name: '话题名称',
-          postsNum: 123
-        }
       ]
     };
   },
