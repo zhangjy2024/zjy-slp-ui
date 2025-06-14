@@ -31,8 +31,10 @@
                 v-model="RoomTextarea"
                 maxlength="10000"
                 rows="8"
+                @keyup.enter.exact.native="sendMessage"
+                @keydown.enter.exact.native="handleKeydown"
               ></el-input>
-              <el-button type="primary" icon="el-icon-s-promotion" circle class="send-button"></el-button>
+              <el-button type="primary" icon="el-icon-s-promotion" circle class="send-button" @click="sendMessage"></el-button>
             </div>  
           </div>
         </div>
@@ -66,8 +68,22 @@ export default {
   components: {
     MessageItem,
   },
+  props: {
+    message: { type: Object }
+  },
   computed: {
-    ...mapState('webSocket', ['socket', 'currentRoomId'])
+    ...mapState('webSocket', ['socket', 'currentRoomId']),
+    currentUserId() {
+      return JSON.parse(sessionStorage.getItem('user_info') || '{}').id;
+    },
+  },
+  watch: {
+    message: {
+      handler(newVal, oldVal) {
+        console.log(newVal)
+        this.messageList.push(newVal)
+      }
+    },
   },
   data() {
     return {
@@ -101,6 +117,25 @@ export default {
       }).finally(() => {
         this.contentLoading = false;
       })
+    },
+    sendMessage() {
+      if (!this.currentRoomId) {
+        this.$message('目标群聊出问题了');
+        return;
+      }
+      if (/^\s*$/.test(this.textarea)) {
+        this.$message('不可以发送空消息');
+        return;
+      } else {
+        let message = { targetId: this.currentRoomId, messageType: 'Y', text: this.textarea };
+        this.socket.send(JSON.stringify(message));
+        this.messageList.push({ fromUserId: this.currentUserId, text: this.textarea });
+        this.textarea = '';
+      }
+    },
+    handleKeydown(event) {
+      event.preventDefault();
+      return false;
     }
   },
   mounted() {

@@ -112,7 +112,7 @@
       </el-col>
       <el-col :span="17" style="padding: 5px; height: 100%;">
         <chat-card v-if="chatCard" :avatar="currentFriendAvatar" :message="message" @closeCahtCard="closeCahtCard"></chat-card>
-        <chat-room-card v-if="roomCard" @closeRoomCard="closeRoomCard"></chat-room-card>
+        <chat-room-card v-if="roomCard" :message="message" @closeRoomCard="closeRoomCard"></chat-room-card>
         <div v-if="empty" class="empty-block">
           <div style="position: relative;">
             <img src="../img/空状态.png" alt="空状态图片" width="500px">
@@ -124,6 +124,7 @@
         </div>
       </el-col>
     </el-row>
+    <!-- 添加好友弹窗 -->
     <el-dialog
       title="添加好友"
       :visible.sync="addFriend"

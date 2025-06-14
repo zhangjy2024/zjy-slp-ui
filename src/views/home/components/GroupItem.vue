@@ -197,6 +197,10 @@ export default {
   z-index: 20; 
   top: 110px;
   left: 112px;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical; 
+  -webkit-line-clamp: 1; 
+  overflow: hidden;
 }
 .gradient-box {
   width: 100%;

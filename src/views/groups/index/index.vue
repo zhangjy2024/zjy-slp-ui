@@ -384,6 +384,7 @@ export default {
       // 这里调用API更新通知状态
       if (withClear) {
         this.notifyDialogVisible = false
+        this.groupNotifies.pop();
       } else {
         this.currentNotification.confirmed = true
       }

@@ -144,6 +144,7 @@
 </template>
 
 <script>
+import { getPostsDetail } from '@/api/square/posts'
 import WangEditorPlus from '@/components/WangEditorPlus'
 
 export default {
@@ -155,8 +156,8 @@ export default {
     return {
       article: {
         id: 1,
-        title: 'Vue 3.2 新特性深度解析',
-        content: '<p>Vue 3.2 引入了许多令人兴奋的新特性...</p>',
+        title: 'Vue2笔记',
+        content: "",
         author: {
           id: 1,
           name: '张工程师',
@@ -170,10 +171,9 @@ export default {
           name: '前端开发交流圈'
         },
         topics: [
-          { id: 1, name: 'Vue.js' },
           { id: 2, name: '前端框架' }
         ],
-        tags: ['Vue3', '新特性', '前端']
+        tags: ['Vue2', '前端']
       },
       comments: [
         {
@@ -233,7 +233,7 @@ export default {
         content: this.commentContent,
         author: {
           id: 1, // 当前用户ID
-          name: '当前用户', // 实际项目中应该用真实用户信息
+          name: 'testUser', // 实际项目中应该用真实用户信息
           avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
         },
         createTime: new Date().toISOString()
@@ -252,6 +252,11 @@ export default {
     goToTopic(topicId) {
       this.$router.push(`/topic/${topicId}`)
     }
+  },
+  mounted() {
+    getPostsDetail().then(res => {
+      this.article.content = res.data.data
+    })
   }
 }
 </script>

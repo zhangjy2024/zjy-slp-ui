@@ -194,6 +194,13 @@
         <!-- 任务内容区 -->
         <div class="task-body">
           <div class="task-section">
+            <h3 class="section-title">任务名称</h3>
+            <div class="section-content">
+              <el-input type="text" ></el-input>
+            </div>
+          </div>
+
+          <div class="task-section">
             <h3 class="section-title">任务目标</h3>
             <div class="section-content">
               <el-input type="text" ></el-input>

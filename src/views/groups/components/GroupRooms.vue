@@ -2,7 +2,7 @@
   <div style="margin-top: 10px;">
     <div class="room-item">
       <div style="width: 50px; height: 50px;">
-        <img :src="groupRoom.roomAvatarSrc" alt="群聊头像">
+        <img :src="groupRoom.roomAvatarSrc" alt="群聊头像" style="width: 100%; height: 100%;">
       </div>
       <div style="width: calc(100% - 150px);">
         <h3 style="margin: 1px 4px;">{{ groupRoom.roomName }}</h3>
